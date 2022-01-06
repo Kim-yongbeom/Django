@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: yellow;
+        }
+    </style>
+    <script>
+        alert('app2에 오신 것을 환영합니다')
+    </script>
+</head>
+<body>
+<h1>app2 시작</h1>
+<br>
+나의 수강과목은 {{ subject }} <br>
+나의 수강교실은 {{ class }}입니다!!
+<hr>
+<a href="/start3?n1=100&n2=300&subject={{ subject }}">to start3</a><br>
+<a href="/start3?n1=1111&n2=3333&subject={{ subject }}">to start3</a><br>
+<a href="/start3?n1=5555&n2=1111&subject={{ subject }}">to start3</a><br>
+<form action="start4" method="post">
+    <hr>
+    {% csrf_token %}
+    n1 : <input name="n1" value="2222"><br>
+    n2 : <input name="n2" value="3333"><br>
+
+    # 눈에는 안보이지만 같이 값이 들어감
+    <input type="hidden" name="subject" value="{{ subject }}">
+    <button style="background: ivory; font-family: 'Book Antiqua'; font-weight: bold">서버로 계산 요청</button>
+</form>
+</body>
+</html>
