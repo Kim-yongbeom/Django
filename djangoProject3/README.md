@@ -1,4 +1,4 @@
-# url파일 연결하는법, 자바스크립트, css
+# url파일 연결, js, css , jquery, 사진넣기, static폴더사용, ajax
 
 ### url파일 연결하는법
 - app5의 views 파일
