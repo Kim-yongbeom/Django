@@ -1,4 +1,4 @@
-# GET, POST
+# GET, POST !!
 
 python ./manage.py startapp app1을 터미널로 만들었다면
 settings.py에서 INSTALLED_APPS 안에 
