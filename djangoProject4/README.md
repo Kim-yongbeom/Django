@@ -1,4 +1,4 @@
-## jquery UI, 비밀번호입력, 결제시스템 외부API, DB데이터 연결, 지도API, 구글차트
+# jquery UI, 비밀번호입력, 결제시스템 외부API, DB 연결, 지도API, 구글차트
 
 ## jquery UI 다양한 기능이 있다!! 페이지에 코드 그대로 복사할 수 있음
 
@@ -297,6 +297,54 @@ marker.setMap(map);
 </html>
 ```
 <img width="349" alt="스크린샷 2022-01-10 오후 2 13 28" src="https://user-images.githubusercontent.com/89058117/148720907-7b108361-821a-46e6-9ca5-82762f5b78fc.png">
+
+### 구글지도 API 여러개 
+```
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Google Map</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+</head>
+<body>
+   <div id="map" style="width: 100%; height: 100vh;"></div>
+   <script async defer
+       src="https://maps.googleapis.com/maps/api/js?key=키입력"></script>
+   <script>
+       var map;
+
+       function initMap() {
+
+           //37.5705805429368, 126.99212654046664
+           comments = ['종로3가역',  '신촌역 이마트', '도봉산']
+           lats = {{ lats }}
+           lngs = {{ lngs }}
+
+           map = new google.maps.Map(document.getElementById('map'), {
+               zoom : 12,
+               center : {
+                       lat : 37.5642135,
+                       lng : 127.0016985
+                   }
+           });
+
+           for (var i = 0; i < 3; i++) {
+               var site = {
+                   lat : lats[i],
+                   lng : lngs[i]
+               };
+
+
+               new google.maps.Marker({
+                   position : site,
+                   map : map,
+                   label : comments[i]
+               });
+           }
+       }
+   </script>
+</body>
+</html>
+```
 
 ### 구글차트 3개 넣기
 ```
