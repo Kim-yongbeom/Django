@@ -1,4 +1,4 @@
-# jquery UI, 비밀번호입력, 결제시스템 외부API, DB데이터 연결, 지도API
+## jquery UI, 비밀번호입력, 결제시스템 외부API, DB데이터 연결, 지도API, 구글차트
 
 ## jquery UI 다양한 기능이 있다!! 페이지에 코드 그대로 복사할 수 있음
 
@@ -297,3 +297,94 @@ marker.setMap(map);
 </html>
 ```
 <img width="349" alt="스크린샷 2022-01-10 오후 2 13 28" src="https://user-images.githubusercontent.com/89058117/148720907-7b108361-821a-46e6-9ca5-82762f5b78fc.png">
+
+### 구글차트 3개 넣기
+```
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart','geochart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart1);
+      google.charts.setOnLoadCallback(drawChart2);
+      google.charts.setOnLoadCallback(drawRegionsMap);
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Popularity'],
+          ['Germany', 200],
+          ['United States', 300],
+          ['Brazil', 400],
+          ['Canada', 500],
+          ['France', 600],
+          ['RU', 700]
+        ]);
+
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+      function drawChart1() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        // Set chart options
+        var options = {'title':'How Much Pizza I Ate Last Night',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      function drawChart2() {
+          var data = google.visualization.arrayToDataTable([
+              ['Year', 'Sales', 'Expenses'],
+              ['2013', 1000, 400],
+              ['2014', 1170, 460],
+              ['2015', 660, 1120],
+              ['2016', 1030, 540]
+          ]);
+
+          var options = {
+              title: 'Company Performance',
+              hAxis: {title: 'Year', titleTextStyle: {color: '#333'}},
+              vAxis: {minValue: 0}
+          };
+
+          var chart = new google.visualization.AreaChart(document.getElementById('chart_div1'));
+          chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+    <div id="chart_div1"></div>
+    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
+```
+<img width="1421" alt="스크린샷 2022-01-10 오후 2 39 19" src="https://user-images.githubusercontent.com/89058117/148722475-6cb00c4d-41e3-4ace-8819-a63c00f28243.png">
+
+
