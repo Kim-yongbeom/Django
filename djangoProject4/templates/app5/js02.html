@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>표를 만들어보자.</title>
+    <script>
+        // document = new Document() 이미 내장되어 있음
+        // 미리 객체를 만들어서 제공하고 있음. 빌트인 객체(내장된 객체)
+        document.write('hello')
+        location.href = 'http://www.naver.com'
+        document.getElementById('idValue')
+    </script>
+    <style>
+        td{
+            {#아이디, 클래스중 td포함한것들#}
+            text-align: center;
+        }
+        #td1{ /* id중에서 td1을 선택해라. */
+            background: pink;
+        }
+        #td2{
+            background: skyblue;
+        }
+        #td3{
+            background: lightgoldenrodyellow;
+        }
+        #td4{
+            background: lightsalmon;
+        }
+        .td5{ /* class중에서 td5를 선택해라. */
+            background: tan;
+        }
+    </style>
+</head>
+<body>
+<H1>나의 첫 표(테이블) 내용입니다.</H1>
+<HR color = 'RED'>
+<table border="1">
+{#    table row#}
+    <tr>
+{#        table defination#}
+        <td id="td1">취미종류</td>
+        <td id="td2">취미금액</td>
+        <td id="td3">취미장소</td>
+    </tr>
+    <tr>
+        <td class="td5">달리기</td>
+        <td>1000</td>
+        <td>여의도 공원</td>
+    </tr>
+    <tr>
+        <td class="td5">등산</td>
+        <td>2000</td>
+        <td>관악산</td>
+    </tr>
+    <tr>
+        <td class="td5">독서</td>
+        <td>10000</td>
+        <td>강남역</td>
+    </tr>
+    <tr>
+        <td id="td4" colspan="3">첫 페이지로</td>
+    </tr>
+</table>
+<hr>
+
+{#순서없는 목록#}
+<ul>
+    <li>tv</li>
+    <li>라디오</li>
+    <li>커피</li>
+</ul>
+{#순서있는 목록#}
+<ol>
+    <li>tv</li>
+    <li>라디오</li>
+    <li>커피</li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+{#    위 코드랑 똑같음 !! #}
+{#    {% load static %}#}
+{#    <script src="{% static 'jquery-3.6.0.js' %}"></script>#}
+    <script type="text/javascript">
+        $(function () {
+            $('#b2').click(function () {
+                {#value는 input태그에만 사용해준다#}
+                pw1Value = $('#pw1').val()
+                pw2Value = $('#pw2').val()
+                pwResult = pw1Value == pw2Value
+                if (pwResult){
+                    $('#result').html('동일합니다')
+                }
+                else{
+                    $('#result').html('동일하지 않습니다')
+                }
+            })
+
+            {#keyup은 비밀번호 입력할때마다 동일한지 확인해줌#}
+            $('#pw2').keyup(function () {
+                pw1Value = $('#pw1').val()
+                pw2Value = $('#pw2').val()
+                pwResult = pw1Value == pw2Value
+                if (pwResult){
+                    $('#result').html('동일합니다')
+                }
+                else{
+                    $('#result').html('동일하지 않습니다')
+                }
+            })
+        })
+        function pay() {
+            {#value는 input태그에만 사용해준다#}
+            priceValue = parseInt(document.getElementById('price').value)
+            countValue = parseInt(document.getElementById('count').value)
+            payValue = priceValue*countValue
+            document.getElementById('result').innerText = payValue
+        }
+    </script>
+</head>
+<body>
+하나당 가격: <input id="price" value="1111"><br>
+물건의 개수: <input id="count" value="5"><br>
+<button id="b1" onclick="pay()">결제하기</button>
+<hr>
+{#패스워드는 jquery로#}
+패스워드1: <input id="pw1" value="1111"><br>
+패스워드2: <input id="pw2" value="1111"><br>
+<button id="b2">패스워드 체크</button>
+<hr>
+<div id="result" style="background: yellow; color: red; font-size: 20px"></div>
+</body>
+</html>

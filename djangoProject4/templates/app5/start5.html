@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: coral;
+        }
+    </style>
+</head>
+<body>
+<h1>html5 page입니다.</h1>
+<hr>
+전달된 요일은 {{ today }} <br>
+전달된 날짜는 {{ when }}
+<hr color="red">
+
+{#두개의 태그는 비슷!!#}
+<a href="/app5/js01">to js01</a> <br>
+
+{#app5 path('/js01', app5.views.js01, name='js01')에서의 name을 여기서 받아오는것 같다.#}
+<a href="{% url 'js01' %}">to js01(name)</a><br>
+<a href="{% url 'js02' %}">to js02(name)</a><br>
+<a href="{% url 'js03' %}">to js03(name)</a><br>
+<a href="{% url 'js04' %}">to js04(name)</a><br>
+<a href="{% url 'js05' %}">to js05(name)</a><br>
+<a href="{% url 'js06' %}">to js06(name)</a><br>
+<a href="{% url 'js07' %}">to js07(name)</a><br>
+<a href="{% url 'js08' %}">to js08(name)</a><br>
+<a href="{% url 'js09' %}">to js09(name)</a><br>
+<a href="{% url 'js10' %}">to js10(name)</a><br>
+<a href="{% url 'js11' %}">to js11(name)</a><br>
+<a href="{% url 'js12' %}">to js12(name)</a><br>
+<a href="{% url 'map1' %}">to map1(name)</a><br>
+<a href="{% url 'chart1' %}">to chart1(name)</a><br>
+</body>
+</html>
