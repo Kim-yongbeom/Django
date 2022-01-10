@@ -1,0 +1,70 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.bxslider').bxSlider({ // 클래스명 주의!
+          auto: true, // 자동으로 애니메이션 시작
+          speed: 500,  // 애니메이션 속도
+          pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+          pager: true, // 페이지 표시 보여짐
+          controls: false,
+          minSlides: 3,
+          maxSlides: 3,
+          slideWidth: 400,
+          slideMargin: 10
+        });
+    });
+  </script>
+    <style>
+        .bx-wrapper {
+          -moz-box-shadow: none;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+          border: 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="display: flex; justify-content: center; ">
+        <div>
+            <ul class="bxslider" >
+              <li>
+                  <a href="#">
+                      <img src="https://www.ikea.com/kr/ko/images/products/lilltjaern-mirror__1031301_pe836473_s5.jpg?f=xl" alt="" title="이미지1">
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/sub_images/156945928033471904.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지2">
+                  </a>
+              </li>
+              <li>
+                  <a href="#">
+                      <img src="https://www.ikea.com/kr/ko/images/products/mydal-bunk-bed-frame-pine__1044974_pe842350_s5.jpg?f=xl" alt="" title="이미지3">
+                  </a>
+              </li>
+                <li>
+                    <a href="#">
+                        <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162916088198930662.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162193245838993039.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/163263804036180290.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<button onclick="window.open('https://www.ikea.com/kr/ko/p/svansele-mirror-gold-colour-50479292/')">button</button>
+</body>
+</html>
