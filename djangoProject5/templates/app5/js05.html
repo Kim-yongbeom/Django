@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{#    jquery 사용!!!#}
+    <script>
+        $(function (){
+            $('#b1').click(function (){
+                userValue1 = $('#site').val() //document.getElementById('userId').value
+                if (userValue1 == 'naver'){
+                    location.href = 'http://www.naver.com'
+                }
+                else if (userValue1 == 'daum'){
+                    location.href = 'http://www.daum.net'
+                }
+                else if (userValue1 == 'google'){
+                    location.href = 'http://www.google.com'
+                }
+                else{
+                    alert('다시 입력해주세요')
+                    userValue1 = $('#site').val('')
+                }
+            })
+
+            $('#b2').click(function (){
+                result = parseInt($('#n1').val()) + parseInt($('#n2').val())
+                $('#b10').html('두 수의 합은 ' + result)
+            })
+            $('#b3').click(function (){
+                result = parseInt($('#n1').val()) - parseInt($('#n2').val())
+                $('#b10').html('두 수의 빼기는 ' + result)
+            })
+            $('#b4').click(function (){
+                result = parseInt($('#n1').val()) * parseInt($('#n2').val())
+                $('#b10').html('두 수의 곱은 ' + result)
+            })
+            $('#b5').click(function (){
+                result = parseInt($('#n1').val()) / parseInt($('#n2').val())
+                $('#b10').html('두 수의 나누기는 ' + result)
+            })
+            $('#b6').click(function (){
+                userValue = $('#userId').val()
+                pwValue = $('#password').val()
+                if (userValue == 'root' && pwValue == '1234'){
+                    console.log(userValue)
+                    console.log(pwValue)
+                    $('#b11').html('로그인 성공')
+                }
+                else{
+                    $('#b11').html('로그인 실패')
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<h1>가고 싶은 사이트(naver, daum, google)</h1>
+<input name="site" id="site" value=""><br>
+<button id="b1">사이트 기능 처리</button>
+<hr>
+숫자1 : <input name="n1" id="n1" value="1111"><br>
+숫자2 : <input name="n2" id="n2" value="2222"><br>
+<button id="b2">두 수의 합</button>
+<button id="b3">두 수의 빼기</button>
+<button id="b4">두 수의 곱</button>
+<button id="b5">두 수의 나누기</button>
+<hr color="blue">
+<div id="b10" style="color: indianred"></div>
+<hr color="skyblue">
+<input name="userId" id="userId" value=""><br>
+<input name="password" id="password" value=""><br>
+<button id="b6">로그인 기능 처리</button>
+<hr>
+<div id="b11" style="color: indianred"></div>
+</body>
+</html>

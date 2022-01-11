@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'jquery-3.6.0.js' %}"></script>
+    <script>
+        $(function () {
+            $('#b1').click(function () {
+                $.ajax({
+                    url : "http://127.0.0.1:5555/app5/target0",
+                    success : function (response) {
+                        alert('받은 응답은 ' + response)
+                        $('#d1').append('- '+response+'<br>')
+                        // text(), html(), append()
+                    },
+                    error : function () {
+                        alert('통신 실패@@@@@')
+                    }
+                })//ajax
+            })//b1
+             $('#b2').click(function () {
+                $.ajax({
+                    url : "http://127.0.0.1:5555/app5/target00",
+                    success : function (response) {
+                        alert('받은 응답은 ' + response)
+                        $('#d2').html(response)
+                    },
+                    error : function () {
+                        alert('통신 실패@@@@@')
+                    }
+                })//ajax
+            })//b1
+        })//root
+    </script>
+</head>
+<body>
+    <button id="b1">ajax test1</button>
+    <button id="b2">ajax test2</button>
+<hr>
+<div id="d1"></div>
+<div id="d2"></div>
+</body>
+</html>

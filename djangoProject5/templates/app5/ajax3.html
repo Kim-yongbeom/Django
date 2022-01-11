@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'jquery-3.6.0.js' %}"></script>
+    <script>
+        $(function () {
+            $('#b1').click(function () {
+                $.ajax({
+                    url : "http://127.0.0.1:5555/app5/target",
+                    success : function (json) {
+                        console.log('받은 응답은 ' + typeof(json))
+                        console.log('받은 result ' + json.result)
+                        console.log('받은 age ' + json.age)
+                        console.log('받은 tel '+ json.tel[0])
+                        total_list= []
+                        tel_list = json.tel
+                        console.log(json.tel.length)
+                        for (i=0; i<tel_list.length; i++){
+                            total_list.push(tel_list)
+                        }
+                        for (i=0; i< total_list.length; i++){
+                            $('#d1').append('- '+total_list[i]+'<br>')
+                        }
+                    },
+                    error : function () {
+                        alert('통신 실패@@@@@')
+                    }
+                })//ajax
+            })//b1
+        })//root
+    </script>
+</head>
+<body>
+    <button id="b1">ajax test1(JSON으로 받아오자)</button>
+<hr>
+<div id="d1"></div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'out.css' %}">
+
+    <script type="text/javascript" src="{% static 'out.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jquery-3.6.0.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            //alert('jquery link성공.!!!@@@@@')
+           // outCall()
+            $('button').click(function () {
+                $.ajax({
+                  url : "http://127.0.0.1:5555/app5/target",
+                  success: function (doc) {
+                        console.log('내 서버로 ajax통신 성공.!!!')
+                        console.log(doc)
+                        $('div').append(doc.result + '<br>')
+                        tel_list = doc.tel
+                        total_list = []
+                        console.log(tel_list.length)
+                        console.log(tel_list[0])
+                        for(i = 0; i< tel_list.length; i++){
+                            console.log(tel_list[i])
+                            total_list.push(tel_list[i])
+                        }
+                        console.log(total_list)
+                    },
+                    error : function () {
+                        alert('내 서버로 ajax통신 실패.!!!')
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<hr>
+<button>AJAX Test</button>
+<div></div>
+</body>
+</html>

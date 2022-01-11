@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'out.css' %}">
+    <script type="text/javascript" src="{% static 'out.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jquery-3.6.0.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            //alert('jquery link 성공 !!')
+            {#out.js에서 불러온 함수#}
+            //outCall()
+            $('button').click(function () {
+                $.ajax({
+                    url : 'http://127.0.0.1:7777/',
+                    //data : 
+                    success : function (result) {
+                        alert('내 서버로 ajax통신 성공')
+                        alert(result)
+                    },
+                    error : function () {
+                        alert('내 서버로 ajax통신 실패')
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<hr>
+{#static폴더에 있는 이미지 불러오기#}
+<img src="{% static '0.png' %}" width="200" height="200"><br>
+<button>AJAX Test</button>
+</body>
+</html>

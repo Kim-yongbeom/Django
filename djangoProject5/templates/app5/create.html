@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        .td1{
+            width: 100px;
+            background: aqua;
+        }
+        .td2{
+            width: 250px;
+            background: cornsilk;
+        }
+        button {
+            color: red;
+            background: white;
+        }
+        button:hover{
+            font-weight: bold;
+            background: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<form action="/app5/member/create2"  method="post">
+    {% csrf_token %}
+<table border="1">
+    <tr>
+        <td class="td1">항목</td>
+        <td class="td2"><input name="name" value=" "></td>
+    </tr>
+    <tr>
+        <td class="td2">입력값</td>
+        <td class="td2"><input name="tel" value=" "></td>
+    </tr>
+    <tr>
+        <td class="td3">입력값</td>
+        <td class="td2"><input name="addr" value=" "></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button>가입</button>
+        </td>
+    </tr>
+</table>
+
+</form>
+
+</body>
+</html>

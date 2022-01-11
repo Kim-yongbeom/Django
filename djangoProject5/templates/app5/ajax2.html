@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=키값입력"></script>
+    <script type="text/javascript" src="{% static 'out.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jquery-3.6.0.js' %}"></script>
+    <script type="text/javascript">
+        function map(lat, lng, divno) {
+            var mapContainer = document.getElementById(divno), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            // 마커가 표시될 위치입니다
+            var markerPosition  = new kakao.maps.LatLng(lat, lng);
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+
+            // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+            // marker.setMap(null);
+        }
+
+        $(function () {
+            //alert('jquery link성공.!!!@@@@@')
+           // outCall()
+            $('#b1').click(function () {
+                $.ajax({
+                  url : "http://127.0.0.1:5555/app5/target2",
+                  success: function (json) {
+                        console.log('내 서버로 ajax통신 성공.!!!')
+                        console.log(json)
+                        latValue = json.lat
+                        lngValue = json.lng
+                        map(latValue, lngValue, 'map1')
+                    },
+                    error : function () {
+                        alert('내 서버로 ajax통신 실패.!!!')
+                    }
+                })
+            })
+            $('#b2').click(function () {
+                $.ajax({
+                  url : "http://127.0.0.1:5555/app5/target3",
+                  success: function (json) {
+                        console.log('내 서버로 ajax통신 성공.!!!')
+                        console.log(json)
+                        latValue = json.lat
+                        lngValue = json.lng
+                        map(latValue, lngValue, 'map2')
+                    },
+                    error : function () {
+                        alert('내 서버로 ajax통신 실패.!!!')
+                    }
+                })
+            })
+            $('#comment').click(function () {
+                $.ajax({
+                  url : "http://127.0.0.1:5555/app5/target4",
+                  success: function (json) {
+                      console.log('내 서버로 ajax통신 성공.!!!')
+                      console.log(json)
+                      commentValue = json.comment
+                      scoreValue = json.score
+                      for (i=0;i<commentValue.length;i++){
+                        $('#cmt').append("<img src='https://www.ikea.com/kr/ko/images/products/synnerby-tri-fold-mirror-grey__0956671_pe804760_s5.jpg?f=xl' style='height: 100px;width: 100px'>"
+                           +commentValue[i]+' '+scoreValue[i]+'점'+'<br>')
+                      }
+                    },
+                    error : function () {
+                        alert('내 서버로 ajax통신 실패.!!!')
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<hr>
+<button id="b1">AJAX Test(종로3가)</button><button id="b2">AJAX Test(동대문)</button>
+<table>
+    <tr>
+        <td>(종로3가)</td> <td>(동대문)</td>
+    </tr>
+    <tr>
+        <td>
+            <div id="map1" style="width:500px;height:350px;"></div>
+            <button id="comment">댓글평점보기</button>
+            <hr>
+            <div id="cmt"></div>
+        </td>
+        <td>
+            <div id="map2" style="width:500px;height:350px;"></div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

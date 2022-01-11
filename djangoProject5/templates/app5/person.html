@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: lightsalmon;
+        }
+    </style>
+</head>
+<body>
+{% if one %}
+    회원id: {{ one.id }} <br>
+    회원name: {{ one.name }} <br>
+    회원tel: {{ one.tel }} <br>
+    회원addr: {{ one.addr }} <br>
+{% endif %}
+<hr color="white">
+<a href="/app5/test/del/{{ one.id }}">
+    <button style="background: cadetblue">회원삭제페이지로</button>
+</a>
+<a href="/app5/test/up/{{ one.id }}">
+    <button style="background: red">회원수정페이지로</button>
+</a>
+</body>
+</html>

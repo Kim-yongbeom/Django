@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>#}
+
+    <script>
+        function check() {
+            // userId에 입력한 값 가지고 와야함
+            // $('#userId') => document.getElementById('userId')
+            // $.ajax() => XMLHttpRequest ajax = new XMLHttpRequest();
+            //              ajax.post()
+            idValue = document.getElementById('userId').value
+            console.log('당신이 입력한 값은'+idValue)
+        }
+        function sum() {
+            n1Value = document.getElementById('n1').value
+            n2Value = document.getElementById('n2').value
+            // 스트링값이라 인트로 바꿔주고 실행
+            result = parseInt(n1Value) + parseInt(n2Value)
+            alert('두 수의 합은 '+result)
+        }
+    </script>
+</head>
+<body>
+<input name="userId" id="userId" value="root"><br>
+<button onclick="check()">아이디 버튼</button>
+<hr>
+숫자1 : <input name="n1" id="n1" value="1111"><br>
+숫자2 : <input name="n2" id="n2" value="2222"><br>
+<button onclick="sum()">두 수의 합</button>
+</body>
+</html>

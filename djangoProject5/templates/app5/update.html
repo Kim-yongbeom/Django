@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        .td1{
+            width: 100px;
+            background: aqua;
+        }
+        .td2{
+            width: 250px;
+            background: cornsilk;
+        }
+        button {
+            color: red;
+            background: white;
+        }
+        button:hover{
+            font-weight: bold;
+            background: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>내용을 수정해주세요.</h1>
+<hr color="blue">
+<form action="/app5/test/up2/go"  method="post">
+    {% csrf_token %}
+<table border="1">
+    <tr>
+        <td class="td1">항목</td>
+        <td class="td2">입력값</td>
+    </tr>
+    <tr>
+        <td class="td1">아이디</td>
+        <td class="td2"><input name="id" value="{{ one.id }}" readonly></td>
+
+    <tr>
+        <td class="td1">이름</td>
+        <td class="td2"><input name="name" value="{{ one.name }}"></td>
+    </tr>
+    <tr>
+        <td class="td1">전화번호</td>
+        <td class="td2"><input name="tel" value="{{ one.tel }}"></td>
+    </tr>
+    <tr>
+        <td class="td1">주소</td>
+        <td class="td2"><input name="addr" value="{{ one.addr }}"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button>수정 완료</button>
+        </td>
+    </tr>
+</table>
+
+</form>
+</body>
+</html>
