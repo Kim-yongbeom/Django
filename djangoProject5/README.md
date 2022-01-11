@@ -1,4 +1,4 @@
-# ajax, DB
+# ajax, DB, 회원가입, 수정, 삭제
 
 ### ajax0.html
 - target은 통신시 데이터, 텍스트를 넘겨주는 느낌인것 같다.
@@ -234,4 +234,229 @@ $('#comment').click(function () {
     - <QuerySet [<Test: apple, 012, kangnam>, <Test: song, 013, shinchon>, <Test: kim, 014, samsung>, <Test: kim, 015, jonro>]>
 <img width="658" alt="스크린샷 2022-01-11 오후 2 51 52" src="https://user-images.githubusercontent.com/89058117/148888631-48891748-28d2-438f-a02e-39df5f5518f7.png">
 
+### sql문을 통해 DB데이터를 views.py 에 함수 추가해줌
+<img width="450" alt="스크린샷 2022-01-11 오후 3 21 36" src="https://user-images.githubusercontent.com/89058117/148891688-29e13f61-ca4d-4134-b203-60ded0715377.png">
 
+### test.html(웹에 DB데이터)
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if test_list %}
+    {% for one in test_list %}
+        회원id: {{ one.id }} <br>
+        회원name: {{ one.name }} <br>
+        회원tel: {{ one.tel }} <br>
+        회원addr: {{ one.addr }} <br>
+        <hr color="red">
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+```
+
+### restful api로 상세페이지
+<img width="475" alt="스크린샷 2022-01-11 오후 3 40 29" src="https://user-images.githubusercontent.com/89058117/148894938-9322f0a3-147e-4dd3-be9d-865d526f58fe.png">
+<img width="449" alt="스크린샷 2022-01-11 오후 3 46 01" src="https://user-images.githubusercontent.com/89058117/148894944-aff7d130-b1d2-4d3c-b498-583629324891.png">
+<img width="296" alt="스크린샷 2022-01-11 오후 3 50 12" src="https://user-images.githubusercontent.com/89058117/148894985-83223ffc-8495-460d-b54b-6bff7a681b93.png">
+<img width="189" alt="스크린샷 2022-01-11 오후 3 50 19" src="https://user-images.githubusercontent.com/89058117/148894992-86fb26bf-cb46-453e-8fa7-9adf156b7478.png">
+<img width="337" alt="스크린샷 2022-01-11 오후 3 50 26" src="https://user-images.githubusercontent.com/89058117/148894993-88d924c6-2e11-4d5f-bfe7-38f5bd54ca21.png">
+
+### 회원가입, 수정, 삭제
+<img width="493" alt="스크린샷 2022-01-11 오후 6 06 53" src="https://user-images.githubusercontent.com/89058117/148913240-d3787a2c-e3b3-413b-8f5a-ad1a561faf47.png">
+<img width="669" alt="스크린샷 2022-01-11 오후 6 07 06" src="https://user-images.githubusercontent.com/89058117/148913248-f3056691-de09-467c-9e77-b5b06b2b8eb4.png">
+<img width="522" alt="스크린샷 2022-01-11 오후 6 07 16" src="https://user-images.githubusercontent.com/89058117/148913255-7045ff72-8c55-45a7-a58b-4a697ac61dc9.png">
+<img width="495" alt="스크린샷 2022-01-11 오후 6 07 25" src="https://user-images.githubusercontent.com/89058117/148913261-2e652c80-7cb3-44e5-804a-cfac64cd5e45.png">
+
+
+- 회원목록페이지로, 회원가입페이지로 test.html
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/app5/member/create">
+    <button style="background: red">회원가입 페이지로</button>
+</a>
+<hr>
+{% if test_list %}
+    {% for one in test_list %}
+        <a href="/app5/test/{{ one.id }}">
+        <button style="background: tan">회원상세페이지로</button>
+        </a><br>
+        회원id: {{ one.id }} <br>
+        회원name: {{ one.name }} <br>
+        회원tel: {{ one.tel }} <br>
+        회원addr: {{ one.addr }} <br>
+        <hr color="red">
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+```
+
+- 회원가입 페이지 create.html
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        .td1{
+            width: 100px;
+            background: aqua;
+        }
+        .td2{
+            width: 250px;
+            background: cornsilk;
+        }
+        button {
+            color: red;
+            background: white;
+        }
+        button:hover{
+            font-weight: bold;
+            background: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<form action="/app5/member/create2"  method="post">
+    {% csrf_token %}
+<table border="1">
+    <tr>
+        <td class="td1">항목</td>
+        <td class="td2"><input name="name" value=" "></td>
+    </tr>
+    <tr>
+        <td class="td2">입력값</td>
+        <td class="td2"><input name="tel" value=" "></td>
+    </tr>
+    <tr>
+        <td class="td3">입력값</td>
+        <td class="td2"><input name="addr" value=" "></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button>가입</button>
+        </td>
+    </tr>
+</table>
+
+</form>
+
+</body>
+</html>
+```
+
+- 회원 상세페이지 person.html
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: lightsalmon;
+        }
+    </style>
+</head>
+<body>
+{% if one %}
+    회원id: {{ one.id }} <br>
+    회원name: {{ one.name }} <br>
+    회원tel: {{ one.tel }} <br>
+    회원addr: {{ one.addr }} <br>
+{% endif %}
+<hr color="white">
+<a href="/app5/test/del/{{ one.id }}">
+    <button style="background: cadetblue">회원삭제페이지로</button>
+</a>
+<a href="/app5/test/up/{{ one.id }}">
+    <button style="background: red">회원수정페이지로</button>
+</a>
+</body>
+</html>
+```
+
+
+- 수정 update.html
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        .td1{
+            width: 100px;
+            background: aqua;
+        }
+        .td2{
+            width: 250px;
+            background: cornsilk;
+        }
+        button {
+            color: red;
+            background: white;
+        }
+        button:hover{
+            font-weight: bold;
+            background: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>내용을 수정해주세요.</h1>
+<hr color="blue">
+<form action="/app5/test/up2/go"  method="post">
+    {% csrf_token %}
+<table border="1">
+    <tr>
+        <td class="td1">항목</td>
+        <td class="td2">입력값</td>
+    </tr>
+    <tr>
+        <td class="td1">아이디</td>
+        <td class="td2"><input name="id" value="{{ one.id }}" readonly></td>
+
+    <tr>
+        <td class="td1">이름</td>
+        <td class="td2"><input name="name" value="{{ one.name }}"></td>
+    </tr>
+    <tr>
+        <td class="td1">전화번호</td>
+        <td class="td2"><input name="tel" value="{{ one.tel }}"></td>
+    </tr>
+    <tr>
+        <td class="td1">주소</td>
+        <td class="td2"><input name="addr" value="{{ one.addr }}"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button>수정 완료</button>
+        </td>
+    </tr>
+</table>
+
+</form>
+</body>
+</html>
+```
