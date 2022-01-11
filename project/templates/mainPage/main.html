@@ -1,10 +1,13 @@
 <html>
 <head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script><script type="text/css" src="{% static 'main.css' %}"></script>
   <script>
     $(document).ready(function(){
+        {#자동슬라이드#}
       $('.bxslider').bxSlider({ // 클래스명 주의!
           auto: true, // 자동으로 애니메이션 시작
           speed: 500,  // 애니메이션 속도
@@ -16,9 +19,77 @@
           slideWidth: 400,
           slideMargin: 10
         });
+      {#상단바 고정#}
+      {#var jbOffset = $( '#header_between' ).offset();#}
+      {#  $( window ).scroll( function() {#}
+      {#    if ( $( document ).scrollTop() > jbOffset.top ) {#}
+      {#      $( '#header_between' ).addClass( 'jbFixed' );#}
+      {#    }#}
+      {#    else {#}
+      {#      $( '#header_between' ).removeClass( 'jbFixed' );#}
+      {#    }#}
+      {#  });#}
+        {#마우스 접근시 자동 서브메뉴#}
+      $("#menubar-menus li").mouseenter(function(event) {
+		$(this).find("div").parent().css("background", "#fff");
+		$(this).find("div").parent().children("a").css("color", "#333");
+		$(this).find("div").slideDown("fast");
+	}).mouseleave(function() {
+		$(this).find("div:visible").slideUp(50, function() {
+			// #menubar-menus li:hover 처리를 하지 않을 경우 아래 라인 활성,
+			$(this).parent().css("background", "#fff");
+			$(this).parent().children("a").css("color", "#333");
+		});
+	});
     });
   </script>
     <style>
+        header {
+            font-family: 'NanumSquare', sans-serif;
+            font-weight: bold;
+        }
+        h1{
+            margin-left: 10%; color: #000;
+            height: 10%; margin-bottom: 0;
+        }
+        #header_between{
+            display: flex; padding-top: 6px; position: fixed; background: #FFF;
+            border-bottom: 1px solid #dedede; width: 80%; height: 10%; margin-top: -10px;
+        }
+        #title{
+            font-size: 35px;
+        }
+        h1 > div > div > a {
+            font-size: medium; color: #000; margin-right: 30px;
+            text-decoration-line: none;
+        }
+        {#.jbFixed {#}
+        {#    position: fixed;#}
+        {#    top: 0px;#}
+        {#}#}
+        #menubar {
+            margin: 0 0 10px 0; width: 100%; height: 40px; background: #fff;
+        }
+        #menubar-menus {
+            width: 600px; margin: 0 auto; list-style: none; padding: 15px 0 0 0; text-align: center;
+            font-size: 0; display: flex;
+        }
+        #menubar-menus > li {
+            width: 200px; height: 40px; vertical-align: middle; text-align: center; font-size: 14px;
+        }
+        #menubar-menus > li > a {
+             vertical-align: middle; width: 200px; height: 40px; text-decoration: none; color: #333;
+            /* 서브 메뉴 영역이 가로 방향으로 100% 보이는 것을 원치 않을 때 아래 라인을 활성 */
+            /*position: relative;*/
+        }
+        /* #menubar-menus li를 position: relative 처리를 하는 경우에 아래 hover 상태 처리를 주석 처리 할 것. */
+        /*#menubar-menus li:hover {
+            background: #FFF;
+        }*/
+        #menubar-menus > li > div {
+            position: absolute; background: #FFF; color: #000; left: 0; width: 100%; top: auto; display: none;
+            padding: 50px 0; z-index: 10;
+        }
         .bx-wrapper {
           -moz-box-shadow: none;
           -webkit-box-shadow: none;
@@ -29,6 +100,37 @@
 
 </head>
 <body>
+    <header>
+        <h1>
+            <div id="header_between">
+                <div>
+                    <a id="title" href="#">TEST</a>
+                </div>
+                <div>
+                    <a href="#">로그인</a>
+                </div>
+                <div>
+                    <a href="#">정보 수정</a>
+                </div>
+            </div>
+        </h1>
+        <div id="menubar">
+            <ul id="menubar-menus">
+                <li>
+                    <a href="#">스토어</a>
+                    <div><p>Submenu 1</p></div>
+                </li>
+                <li>
+                    <a href="#">커뮤니티</a>
+                    <div><p>Submenu 2</p></div>
+                </li>
+                <li>
+                    <a href="#">글쓰기</a>
+                    <div><p>Submenu 3</p></div>
+                </li>
+            </ul>
+        </div>
+    </header>
     <div style="display: flex; justify-content: center; ">
         <div>
             <ul class="bxslider" >
@@ -65,6 +167,8 @@
             </ul>
         </div>
     </div>
-<button onclick="window.open('https://www.ikea.com/kr/ko/p/svansele-mirror-gold-colour-50479292/')">button</button>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
