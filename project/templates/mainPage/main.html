@@ -6,8 +6,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script><script type="text/css" src="{% static 'main.css' %}"></script>
   <script>
+      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
     $(document).ready(function(){
-        {#자동슬라이드#}
+        if(!isMobile) {
+          {#자동슬라이드#}
       $('.bxslider').bxSlider({ // 클래스명 주의!
           auto: true, // 자동으로 애니메이션 시작
           speed: 500,  // 애니메이션 속도
@@ -19,16 +21,6 @@
           slideWidth: 400,
           slideMargin: 10
         });
-      {#상단바 고정#}
-      {#var jbOffset = $( '#header_between' ).offset();#}
-      {#  $( window ).scroll( function() {#}
-      {#    if ( $( document ).scrollTop() > jbOffset.top ) {#}
-      {#      $( '#header_between' ).addClass( 'jbFixed' );#}
-      {#    }#}
-      {#    else {#}
-      {#      $( '#header_between' ).removeClass( 'jbFixed' );#}
-      {#    }#}
-      {#  });#}
         {#마우스 접근시 자동 서브메뉴#}
       $("#menubar-menus li").mouseenter(function(event) {
 		$(this).find("div").parent().css("background", "#fff");
@@ -41,32 +33,63 @@
 			$(this).parent().children("a").css("color", "#333");
 		});
 	});
+     } else {
+          //MOBILE
+            {#자동슬라이드#}
+      $('.bxslider').bxSlider({ // 클래스명 주의!
+          auto: true, // 자동으로 애니메이션 시작
+          speed: 500,  // 애니메이션 속도
+          pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+          pager: true, // 페이지 표시 보여짐
+          controls: false,
+          minSlides: 1,
+          maxSlides: 2,
+          slideWidth: 400,
+          slideMargin: 10
+        });
+        {#마우스 접근시 자동 서브메뉴#}
+      $("#menubar-menus li").mouseenter(function(event) {
+		$(this).find("div").parent().css("background", "#fff");
+		$(this).find("div").parent().children("a").css("color", "#333");
+		$(this).find("div").slideDown("fast");
+	}).mouseleave(function() {
+		$(this).find("div:visible").slideUp(50, function() {
+			// #menubar-menus li:hover 처리를 하지 않을 경우 아래 라인 활성,
+			$(this).parent().css("background", "#fff");
+			$(this).parent().children("a").css("color", "#333");
+		});
+	});
+     }
     });
   </script>
     <style>
+        @font-face {
+            font-family: 'KOTRAHOPE';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
         header {
             font-family: 'NanumSquare', sans-serif;
-            font-weight: bold;
         }
         h1{
-            margin-left: 10%; color: #000;
-            height: 10%; margin-bottom: 0;
+            color: #000;
+            height: 75px; margin-bottom: 0;
         }
         #header_between{
-            display: flex; padding-top: 6px; position: fixed; background: #FFF;
-            border-bottom: 1px solid #dedede; width: 80%; height: 10%; margin-top: -10px;
+            padding-top: 6px; position: fixed; background: #FFF;
+            border-bottom: 1px solid #dedede; width: 100%; height: 75px; margin-top: -10px; z-index: 1;
         }
         #title{
-            font-size: 35px;
+            font-size: 35px; text-decoration-line: none; color: #333; font-family: 'KOTRAHOPE';
         }
-        h1 > div > div > a {
+        h1 > div > div {
+            display: flex; justify-content: space-between; height: 100%; line-height: 63px; padding: 0 100px 0 100px;
+        }
+        h1 > div > div > div > a {
             font-size: medium; color: #000; margin-right: 30px;
             text-decoration-line: none;
         }
-        {#.jbFixed {#}
-        {#    position: fixed;#}
-        {#    top: 0px;#}
-        {#}#}
         #menubar {
             margin: 0 0 10px 0; width: 100%; height: 40px; background: #fff;
         }
@@ -88,7 +111,13 @@
         }*/
         #menubar-menus > li > div {
             position: absolute; background: #FFF; color: #000; left: 0; width: 100%; top: auto; display: none;
-            padding: 50px 0; z-index: 10;
+            padding: 50px 0; z-index: 2;
+        }
+        p{
+            display: flex;
+        }
+        #mbti_16{
+            text-decoration-line: none; color: #000;
         }
         .bx-wrapper {
           -moz-box-shadow: none;
@@ -104,28 +133,37 @@
         <h1>
             <div id="header_between">
                 <div>
-                    <a id="title" href="#">TEST</a>
-                </div>
-                <div>
-                    <a href="#">로그인</a>
-                </div>
-                <div>
-                    <a href="#">정보 수정</a>
+                    <a id="title" href="#">
+                        오늘의 MBTI
+                    </a>
+                    <div>
+                        <a href="#">로그인</a>
+                        <a href="#">회원가입</a>
+                    </div>
                 </div>
             </div>
         </h1>
         <div id="menubar">
             <ul id="menubar-menus">
                 <li>
-                    <a href="#">스토어</a>
-                    <div><p>Submenu 1</p></div>
+                    <a href="#">MBTI</a>
+                    <div>
+                        <p>
+                            {% for one in mbti %}
+                                <a id="mbti_16" href="{{ one }}">
+                                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163572945028172903.png?gif=1&w=180&h=180&c=c">
+                                    {{ one }}<br>
+                                </a>
+                            {% endfor %}
+                        </p>
+                    </div>
                 </li>
                 <li>
-                    <a href="#">커뮤니티</a>
+                    <a href="#">무드</a>
                     <div><p>Submenu 2</p></div>
                 </li>
                 <li>
-                    <a href="#">글쓰기</a>
+                    <a href="#">커뮤니티</a>
                     <div><p>Submenu 3</p></div>
                 </li>
             </ul>
@@ -167,8 +205,8 @@
             </ul>
         </div>
     </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
+
