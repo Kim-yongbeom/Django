@@ -1,14 +1,17 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script><script type="text/css" src="{% static 'main.css' %}"></script>
-  <script>
-      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script><script type="text/css" src="{% static 'main.css' %}"></script>
+    <script>
     $(document).ready(function(){
-        if(!isMobile) {
           {#자동슬라이드#}
       $('.bxslider').bxSlider({ // 클래스명 주의!
           auto: true, // 자동으로 애니메이션 시작
@@ -19,7 +22,8 @@
           minSlides: 3,
           maxSlides: 3,
           slideWidth: 400,
-          slideMargin: 10
+          slideMargin: 10,
+          onSliderLoad: function(){ $("#edd").css("visibility", "visible").animate({opacity:1}); }
         });
         {#마우스 접근시 자동 서브메뉴#}
       $("#menubar-menus li").mouseenter(function(event) {
@@ -33,75 +37,40 @@
 			$(this).parent().children("a").css("color", "#333");
 		});
 	});
-     } else {
-          //MOBILE
-            {#자동슬라이드#}
-      $('.bxslider').bxSlider({ // 클래스명 주의!
-          auto: true, // 자동으로 애니메이션 시작
-          speed: 500,  // 애니메이션 속도
-          pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
-          pager: true, // 페이지 표시 보여짐
-          controls: false,
-          minSlides: 1,
-          maxSlides: 2,
-          slideWidth: 400,
-          slideMargin: 10
-        });
-        {#마우스 접근시 자동 서브메뉴#}
-      $("#menubar-menus li").mouseenter(function(event) {
-		$(this).find("div").parent().css("background", "#fff");
-		$(this).find("div").parent().children("a").css("color", "#333");
-		$(this).find("div").slideDown("fast");
-	}).mouseleave(function() {
-		$(this).find("div:visible").slideUp(50, function() {
-			// #menubar-menus li:hover 처리를 하지 않을 경우 아래 라인 활성,
-			$(this).parent().css("background", "#fff");
-			$(this).parent().children("a").css("color", "#333");
-		});
-	});
-     }
-    });
-  </script>
+     })
+    </script>
     <style>
-        @font-face {
-            font-family: 'KOTRAHOPE';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
+        .navbar-light{
+            height: 80px; margin-bottom: 0;
         }
-        header {
-            font-family: 'NanumSquare', sans-serif;
-        }
-        h1{
-            color: #000;
-            height: 75px; margin-bottom: 0;
-        }
-        #header_between{
+        .container-fluid{
             padding-top: 6px; position: fixed; background: #FFF;
-            border-bottom: 1px solid #dedede; width: 100%; height: 75px; margin-top: -10px; z-index: 1;
+            border-bottom: 1px solid #dedede; width: 100%; height: 75px; margin-top: -10px; z-index: 2;
         }
-        #title{
-            font-size: 35px; text-decoration-line: none; color: #333; font-family: 'KOTRAHOPE';
+        nav > div > a {
+            line-height: 50px;
+            text-align: center;
+            padding: 0 0 0 7%;
         }
-        h1 > div > div {
-            display: flex; justify-content: space-between; height: 100%; line-height: 63px; padding: 0 100px 0 100px;
+        #auth{
+            padding: 0 3% 0 0;
         }
-        h1 > div > div > div > a {
-            font-size: medium; color: #000; margin-right: 30px;
+        #auth > a{
             text-decoration-line: none;
+            color: black;
+            padding-right: 5px;
         }
         #menubar {
-            margin: 0 0 10px 0; width: 100%; height: 40px; background: #fff;
+	        width: 100%; height: 40px; background: #666;
         }
         #menubar-menus {
-            width: 600px; margin: 0 auto; list-style: none; padding: 15px 0 0 0; text-align: center;
-            font-size: 0; display: flex;
+            width: 600px; margin: 0 auto; list-style: none; padding: 0; text-align: center; font-size: 0; display: table;
         }
         #menubar-menus > li {
-            width: 200px; height: 40px; vertical-align: middle; text-align: center; font-size: 14px;
+            width: 200px; height: 40px; display: table-cell; vertical-align: middle; text-align: center; font-size: 14px;
         }
         #menubar-menus > li > a {
-             vertical-align: middle; width: 200px; height: 40px; text-decoration: none; color: #333;
+             display: table-cell; vertical-align: middle; width: 200px; height: 40px; text-decoration: none; color: #FFF;
             /* 서브 메뉴 영역이 가로 방향으로 100% 보이는 것을 원치 않을 때 아래 라인을 활성 */
             /*position: relative;*/
         }
@@ -111,13 +80,7 @@
         }*/
         #menubar-menus > li > div {
             position: absolute; background: #FFF; color: #000; left: 0; width: 100%; top: auto; display: none;
-            padding: 50px 0; z-index: 2;
-        }
-        p{
-            display: flex;
-        }
-        #mbti_16{
-            text-decoration-line: none; color: #000;
+            padding: 50px 0; z-index: 10;
         }
         .bx-wrapper {
           -moz-box-shadow: none;
@@ -126,24 +89,22 @@
           border: 0;
         }
     </style>
-
 </head>
 <body>
-    <header>
-        <h1>
-            <div id="header_between">
-                <div>
-                    <a id="title" href="#">
-                        오늘의 MBTI
-                    </a>
-                    <div>
-                        <a href="#">로그인</a>
-                        <a href="#">회원가입</a>
-                    </div>
-                </div>
+<header>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://image.rocketpunch.com/company/2425/bucketplace_logo_1520495612.png?s=400x400&t=inside"
+               alt="" width="50" height="50" class="img-fluid rounded">
+            <div id="auth">
+                <a href="##">로그인</a>
+                <a href="###">회원가입</a>
             </div>
-        </h1>
-        <div id="menubar">
+        </a>
+      </div>
+    </nav>
+    <div id="menubar">
             <ul id="menubar-menus">
                 <li>
                     <a href="#">MBTI</a>
@@ -168,45 +129,96 @@
                 </li>
             </ul>
         </div>
-    </header>
-    <div style="display: flex; justify-content: center; ">
-        <div>
-            <ul class="bxslider" >
-              <li>
-                  <a href="#">
-                      <img src="https://www.ikea.com/kr/ko/images/products/lilltjaern-mirror__1031301_pe836473_s5.jpg?f=xl" alt="" title="이미지1">
-                  </a>
-              </li>
-              <li>
-                  <a href="#">
-                      <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/sub_images/156945928033471904.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지2">
-                  </a>
-              </li>
-              <li>
-                  <a href="#">
-                      <img src="https://www.ikea.com/kr/ko/images/products/mydal-bunk-bed-frame-pine__1044974_pe842350_s5.jpg?f=xl" alt="" title="이미지3">
-                  </a>
-              </li>
-                <li>
-                    <a href="#">
-                        <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162916088198930662.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162193245838993039.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/163263804036180290.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
-                    </a>
-                </li>
-            </ul>
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" style="z-index: 0; padding-top: 45px">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
+          <img src="https://www.ikea.com/kr/ko/images/products/lilltjaern-mirror__1031301_pe836473_s5.jpg?f=xl"
+               class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/sub_images/156945928033471904.jpg?gif=1&w=1280&h=1280&c=c"
+               class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <img src="https://www.ikea.com/kr/ko/images/products/mydal-bunk-bed-frame-pine__1044974_pe842350_s5.jpg?f=xl"
+               class="d-block w-100" alt="...">
+        </div>
+          <div class="carousel-item" data-bs-interval="4000">
+          <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162916088198930662.jpg?gif=1&w=1280&h=1280&c=c"
+               class="d-block w-100" alt="...">
+        </div>
+          <div class="carousel-item" data-bs-interval="4000">
+          <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162193245838993039.jpg?gif=1&w=1280&h=1280&c=c"
+               class="d-block w-100" alt="...">
+        </div>
+          <div class="carousel-item" data-bs-interval="4000">
+          <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/163263804036180290.jpg?gif=1&w=1280&h=1280&c=c"
+               class="d-block w-100" alt="...">
+        </div>
+      </div>
+    </div>
+    <div id="edd" style="visibility:hidden;opacity:0">
+        <div style="display: flex; justify-content: center; ">
+            <div>
+                <ul class="bxslider" >
+                  <li>
+                      <a href="#">
+                          <img src="https://www.ikea.com/kr/ko/images/products/lilltjaern-mirror__1031301_pe836473_s5.jpg?f=xl" alt="" title="이미지1">
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#">
+                          <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/sub_images/156945928033471904.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지2">
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#">
+                          <img src="https://www.ikea.com/kr/ko/images/products/mydal-bunk-bed-frame-pine__1044974_pe842350_s5.jpg?f=xl" alt="" title="이미지3">
+                      </a>
+                  </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162916088198930662.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162193245838993039.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/163263804036180290.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+</header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">hello</div>
+            <div class="col-md-4">hello</div>
+            <div class="col-md-4">hello</div>
+        </div>
+    </div>
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
