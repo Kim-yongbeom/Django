@@ -27,89 +27,7 @@
         });
      })
     </script>
-    <style>
-        @font-face {
-    font-family: 'Cafe24SsurroundAir';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-        .navbar-light{
-            height: 80px; margin-bottom: 0; font-weight: bold; font-family: 'Cafe24SsurroundAir';
-        }
-        .container-fluid{
-            padding-top: 6px; position: fixed; background: #FFF;
-            border-bottom: 1px solid #dedede; width: 100%; height: 75px; margin-top: -10px; z-index: 2;
-        }
-        nav > div > a {
-            line-height: 50px;
-            text-align: center;
-            padding: 0 0 0 7%;
-        }
-        #auth{
-            padding: 0 3% 0 0;
-        }
-        #auth > a{
-            text-decoration-line: none;
-            color: black;
-            padding-right: 5px;
-        }
-        .bx-wrapper {
-          -moz-box-shadow: none;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-          border: 0;
-        }
-        .footer_dropdown{
-            margin-left: 4.6%;
-        }
-        #dropdownMenuLink{
-            padding-top: 6px;
-            width: 67px;
-            background: white;
-            border: white;
-            color: #333;
-            font-size: 13px;
-        }
-        .container{
-            font-size: small;
-        }
-        .col{
-            padding-top: 12px;
-        }
-        .card-body{
-            padding-left: 17px;
-        }
-        .card-title{
-            -webkit-box-direction: normal;
-            word-break: break-all;
-            font-size: 13px;
-            font-weight: 400;
-            line-height: 17px;
-            color: #000;
-            transition: opacity .1s;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            word-wrap: break-word;
-        }
-        .btn{
-            margin: 1px;
-            padding: 7px 0 0 0;
-            width: 60px;
-            height: 30px;
-            font-size: 12px;
-        }
-        .mood{
-            width: 38px;
-            height: 30px;
-        }
-        .category{
-            width: 97.8%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
 <body>
 <header>
@@ -263,216 +181,42 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
+        {% if goods %}
+            {% for one in goods %}
+                <div class="col" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <img id="modal-img" style="width: 70%; height: 70%" src="{{ one.imgs }}">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card" style="width: 10.2rem;">
+                      <img style="width: 161.188px; height: 161.188px" src="{{ one.imgs }}"
+                           class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ one.title }}</h5>
+                        <p class="card-text">♥️ 좋아요 1111</p>
+                        <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood1 }}</div>
+                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood2 }}</div>
+                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood3 }}</div>
+                          <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ one.category }}</div>
+                      </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">네추럴</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">유니크</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">미니멀</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등LED체인조명40등LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 10.2rem;">
-                  <img src="https://www.ikea.com/kr/ko/images/products/snoeyra-led-lighting-chain-with-40-lights-indoor-battery-operated-silver-colour__0884666_pe674258_s5.jpg?f=xl"
-                       class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">[SNÖYRA 스뇌위라] LED체인조명40등</h5>
-                    <p class="card-text">♥️ 좋아요 1111</p>
-                    <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn mood btn-primary" style="background: lightsalmon; border:white">무드</div>
-                      <div class="btn category btn-primary" style="background: cornflowerblue; border:white">조명</div>
-                  </div>
-                </div>
-            </div>
+            {% endfor %}
+        {% endif %}
         </div>
     </div>
 </footer>
@@ -480,3 +224,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
