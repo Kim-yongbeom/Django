@@ -25,7 +25,8 @@
           slideMargin: 10,
           onSliderLoad: function(){ $("#edd").css("visibility", "visible").animate({opacity:1}); }
         });
-     })
+
+    })
     </script>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
@@ -183,36 +184,40 @@
         <div class="row">
         {% if goods %}
             {% for one in goods %}
-                <div class="col" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="col">
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <img id="modal-img" style="width: 70%; height: 70%" src="{{ one.imgs }}">
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="modal-id" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{ one.title }}</h5>
+                              </div>
+                              <div class="modal-body">
+                                <img id="modal-img" style="width: 70%; height: 70%" src="{{ one.imgs }}">
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">
+                                    <a href="#">
+                                        바로가기
+                                    </a>
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="card" style="width: 10.2rem;">
-                      <img style="width: 161.188px; height: 161.188px" src="{{ one.imgs }}"
-                           class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ one.title }}</h5>
-                        <p class="card-text">♥️ 좋아요 1111</p>
-                        <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood1 }}</div>
-                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood2 }}</div>
-                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood3 }}</div>
-                          <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ one.category }}</div>
-                      </div>
+                        <div class="card" style="width: auto;">
+                          <img style="width: 161.188px; height: 161.188px; " src="{{ one.imgs }}"
+                               class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ one.title }}</h5>
+                            <p class="card-text">♥️ 좋아요 1111</p>
+                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood1 }}</div>
+                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood2 }}</div>
+                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood3 }}</div>
+                              <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ one.category }}</div>
+                          </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
@@ -224,4 +229,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 
