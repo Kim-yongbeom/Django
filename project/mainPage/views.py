@@ -13,3 +13,21 @@ def main(request):
                'goods' : goods_list
                }
     return render(request, 'mainPage/main.html',context)
+
+def scroll(request):
+    goods_list = Good.objects.all()
+    context = {'mbti': ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ',
+                        'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP',
+                        'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'],
+               'goods': goods_list
+               }
+    return render(request, 'mainPage/scroll.html',context)
+
+def goods(request):
+    goods_list = Good.objects.all()
+    context = {'mbti': ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ',
+                        'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP',
+                        'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'],
+               'goods': goods_list
+               }
+    return render(request, 'mainPage/scroll.html', context)

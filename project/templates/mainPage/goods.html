@@ -1,0 +1,47 @@
+<div class="container">
+        <div class="row">
+        {% if goods %}
+            {% for one in goods %}
+                <div class="col">
+                    <!-- Modal -->
+                    <div data-bs-toggle="modal" data-bs-target="#exampleModal{{ one.id }}">
+                    <div class="modal fade" id="exampleModal{{ one.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ one.id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel{{ one.id }}">{{ one.title }}</h5>
+                          </div>
+                          <div class="modal-body">
+                            <img id="modal-img" style="width: 70%; height: 70%" src="{{ one.imgs }}">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding-top: 1px">
+                                닫기
+                            </button>
+                            <button type="button" class="btn btn-primary" style="padding-top: 1px">
+                                <a id="detail-link" href="{{ one.detail }}" target="_blank" style="color: white; text-decoration-line: none;">
+                                    바로가기
+                                </a>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card" style="width: 10.2rem;">
+                      <img style="width: 161.188px; height: 161.188px" src="{{ one.imgs }}"
+                           class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ one.title }}</h5>
+                        <p class="card-text">♥️ 좋아요 1111</p>
+                        <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood1 }}</div>
+                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood2 }}</div>
+                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood3 }}</div>
+                          <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ one.category }}</div>
+                      </div>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>

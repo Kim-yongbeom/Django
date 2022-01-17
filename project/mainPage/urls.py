@@ -20,4 +20,6 @@ import mainPage.views
 
 urlpatterns = [
     path('', mainPage.views.main),
+    path('scroll', mainPage.views.scroll),
+    path('goods', mainPage.views.goods)
 ]

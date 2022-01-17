@@ -24,12 +24,6 @@ nav > div > a {
     color: black;
     padding-right: 5px;
 }
-.bx-wrapper {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: 0;
-}
 .footer_dropdown{
     margin-left: 4.6%;
 }
@@ -44,11 +38,8 @@ nav > div > a {
 .container{
     font-size: small;
 }
-.col{
-    padding-top: 12px;
-}
 .card-body{
-    padding-left: 17px;
+    padding: 16px 16px 0 17px;
 }
 .card-title{
     -webkit-box-direction: normal;
@@ -79,4 +70,3 @@ nav > div > a {
 .category{
     width: 97.8%;
 }
-

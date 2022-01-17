@@ -21,17 +21,109 @@
           controls: false,
           minSlides: 3,
           maxSlides: 3,
-          slideWidth: 400,
+          slideWidth: 360,
           slideMargin: 10,
           onSliderLoad: function(){ $("#edd").css("visibility", "visible").animate({opacity:1}); }
         });
      })
     </script>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <style>
+        @media screen and (max-width: 500px) {
+            #bx-id {
+                display: none;
+            }
+            .bx-wrapper {
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              border: 0;
+            }
+            #carouselExampleCaptions{
+                display: block;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 4% 0 4%;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 161px;
+                border: white;
+                margin: auto;
+            }
+            .card-img-top{
+                width: 161px;
+                height: 161px;
+            }
+            #like-btn{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 46%;
+                right: 5%
+            }
+        }
+        @media screen and (min-width: 500px) {
+            #carouselExampleCaptions{
+                display: none;
+            }
+            #bx-id {
+                display: block;
+            }
+            .bx-wrapper {
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              border: 0;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 15% 0 15%;
+            }
+            footer {
+                margin: 0 10% 0 10%;
+                padding-left: 2%;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 260px;
+                border: white;
+                margin-bottom: 20px;
+                overflow: hidden;
+            }
+            .card-img-top{
+                width: 100%;
+                height: 260px;
+                object-fit:cover;
+                transform:scale(1.0);
+                transition: transform .2s;
+            }
+            .card-img-top:hover{            /* 마우스 호버시 */
+                transform:scale(1.1);            /* 이미지 확대 */
+                transition: transform .2s; 	/*  시간 설정  */
+            }
+            #like-btn{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 35%;
+                right: 5%
+            }
+        }
+    </style>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light" style="padding-bottom: 8px">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="https://image.rocketpunch.com/company/2425/bucketplace_logo_1520495612.png?s=400x400&t=inside"
@@ -43,10 +135,10 @@
         </a>
       </div>
     </nav>
-    <ul class="nav nav-tabs" style="justify-content: center; font-family: 'Cafe24SsurroundAir'; font-weight: bold">
+    <ul class="nav nav-tabs" style="justify-content: space-between; font-family: 'Cafe24SsurroundAir'; font-weight: bold; background: #F8F9FA">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-           style="color: #333;" role="button" aria-expanded="false">MBTI</a>
+           style="color: #333; margin-top: 2px;" role="button" aria-expanded="false">MBTI</a>
         <ul class="dropdown-menu" style="height: 500px; overflow: auto">
             {% for one in mbti %}
                 <a id="mbti_16" href="#">
@@ -59,7 +151,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-           style="color: #333" role="button" aria-expanded="false">무드</a>
+           style="color: #333; margin-top: 2px" role="button" aria-expanded="false">무드</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">미니멀</a></li>
           <li><a class="dropdown-item" href="#">모던</a></li>
@@ -68,14 +160,14 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" style="color: #333">커뮤니티</a>
+        <a class="nav-link" href="#" style="color: #333; margin-top: 2px">커뮤니티</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
-           style="color: #333" target='_blank'>퀴즈</a>
+           style="color: #333; margin-top: 2px" target='_blank'>퀴즈</a>
       </li>
     </ul>
-    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" style="z-index: 0; padding-top: 7px">
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" style="z-index: 0;">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -125,7 +217,7 @@
     </div>
     <div id="edd" style="visibility:hidden;opacity:0">
         <div style="display: flex; justify-content: center; ">
-            <div>
+            <div id="bx-id">
                 <ul class="bxslider" >
                   <li>
                       <a href="#">
@@ -183,37 +275,49 @@
         <div class="row">
         {% if goods %}
             {% for one in goods %}
-                <div class="col">
+                <div class="col" >
                     <!-- Modal -->
-                    <div data-bs-toggle="modal" data-bs-target="#exampleModal{{ one.id }}">
-                    <div class="modal fade" id="exampleModal{{ one.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ one.id }}" aria-hidden="true">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel{{ one.id }}">{{ one.title }}</h5>
-                          </div>
-                          <div class="modal-body">
-                            <img id="modal-img" style="width: 70%; height: 70%" src="{{ one.imgs }}">
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                          </div>
+                    <div class="card" style="cursor:pointer;">
+                        <div data-bs-toggle="modal" data-bs-target="#exampleModal{{ one.id }}">
+                            <div class="modal fade" id="exampleModal{{ one.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ one.id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel{{ one.id }}">{{ one.title }}</h5>
+                                  </div>
+                                  <div class="modal-body">
+                                    <img id="modal-img" style="width: 70%; height: 70%;" src="{{ one.imgs }}">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding-top: 1px">
+                                        닫기
+                                    </button>
+                                    <button type="button" class="btn btn-primary" style="padding-top: 1px">
+                                        <a id="detail-link" href="{{ one.detail }}" target="_blank" style="color: white; text-decoration-line: none;">
+                                            바로가기
+                                        </a>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                              <img src="{{ one.imgs }}"
+                                   class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">{{ one.title }}</h5>
+                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood1 }}</div>
+                                  <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood2 }}</div>
+                                  <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood3 }}</div>
+                                  <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ one.category }}</div>
+                              </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="card" style="width: 10.2rem;">
-                      <img style="width: 161.188px; height: 161.188px" src="{{ one.imgs }}"
-                           class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ one.title }}</h5>
-                        <p class="card-text">♥️ 좋아요 1111</p>
-                        <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood1 }}</div>
-                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood2 }}</div>
-                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood3 }}</div>
-                          <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ one.category }}</div>
-                      </div>
-                    </div>
+                        <button type="button" id="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18">
+                                <path d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/>
+                            </svg>
+                        </button>
+
                 </div>
                 </div>
             {% endfor %}
