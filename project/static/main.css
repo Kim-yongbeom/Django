@@ -19,11 +19,6 @@ nav > div > a {
 #auth{
     padding: 0 3% 0 0;
 }
-#auth > a{
-    text-decoration-line: none;
-    color: black;
-    padding-right: 5px;
-}
 .footer_dropdown{
     margin-left: 4.6%;
 }

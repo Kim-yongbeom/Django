@@ -1,3 +1,5 @@
+from django.core import serializers
+from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -23,11 +25,9 @@ def scroll(request):
                }
     return render(request, 'mainPage/scroll.html',context)
 
-def goods(request):
+def target(request):
     goods_list = Good.objects.all()
-    context = {'mbti': ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ',
-                        'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP',
-                        'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'],
-               'goods': goods_list
+    context = {
+               'goods': serializers.serialize('json', goods_list)
                }
-    return render(request, 'mainPage/scroll.html', context)
+    return JsonResponse(context)
