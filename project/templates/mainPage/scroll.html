@@ -5,29 +5,213 @@
     <title>Title</title>
     {% load static %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script><script type="text/css" src="{% static 'main.css' %}"></script>
     <script type="text/javascript">
         $(function () {
+            let index = 0;
+            $(window).scroll(function () {
+                let $window = $(this);
+                let scrollTop = $window.scrollTop();
+                let windowHeight = $window.height();
+                let documentHeight = $(document).height();
+                if (scrollTop + windowHeight +1 >= documentHeight){
+                    index++;
+                    setTimeout(fetchlist,200);
+                }
+            })
             allGoods = []
-            $('#wb').click(function () {
+            function fetchlist () {
                 $.ajax({
                     url : "/target",
                     success : function (json) {
                         for (i=0; i<JSON.parse(json.goods)[JSON.parse(json.goods).length - 1].pk; i++){
                             allGoods.push(JSON.parse(json.goods)[i].fields)
+                            $('.row').append(
+                                `
+                                <div class="col" >
+                                    <!-- Modal -->
+                                    <div class="card" style="cursor:pointer;">
+                                        <div data-bs-toggle="modal" data-bs-target="#exampleModal${ JSON.parse(json.goods)[i].pk }">
+                                            <div class="modal fade" id="exampleModal${ JSON.parse(json.goods)[i].pk }" tabindex="-1" aria-labelledby="exampleModalLabel${ JSON.parse(json.goods)[i].pk }" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel${ JSON.parse(json.goods)[i].pk }">${ allGoods[i].title }</h5>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    <img id="modal-img" style="width: 70%; height: 70%;" src="${ allGoods[i].imgs }">
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding-top: 1px">
+                                                        닫기
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" style="padding-top: 1px">
+                                                        <a id="detail-link" href="${ allGoods[i].detail }" target="_blank" style="color: white; text-decoration-line: none;">
+                                                            바로가기
+                                                        </a>
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                              <img src="${ allGoods[i].imgs }"
+                                                   class="card-img-top" alt="...">
+                                              <div class="card-body">
+                                                <h5 class="card-title">${ allGoods[i].title }</h5>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                                  <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                                  <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                                  <div class="btn category btn-primary" style="background: cornflowerblue; border:white">${ allGoods[i].category }</div>
+                                              </div>
+                                        </div>
+                                        <button type="button" id="like-btn" class="heart">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                        </button>
+
+                                </div>
+                                </div>
+                                `
+                            )
                         }
-                        console.log(allGoods)
+
                     },
                     error : function () {
                         alert('ajax 오류!')
                     }
                 })
-            })
+            }
         })
     </script>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <style>
+        @media screen and (max-width: 500px) {
+            .pc-menu{
+                visibility: hidden;
+            }
+            .menu{
+                margin: auto;
+            }
+            #bx-id {
+                display: none;
+            }
+            .bx-wrapper {
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              border: 0;
+            }
+            #carouselExampleCaptions{
+                display: block;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 4% 0 4%;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 161px;
+                border: white;
+                margin: auto;
+            }
+            .card-img-top{
+                width: 161px;
+                height: 161px;
+            }
+            #like-btn{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 46%;
+                right: 5%
+            }
+        }
+        @media screen and (min-width: 500px) {
+            .menu{
+                display: none;
+            }
+            #carouselExampleCaptions{
+                display: none;
+            }
+            #bx-id {
+                display: block;
+            }
+            .bx-wrapper {
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              border: 0;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 15% 0 15%;
+            }
+            footer {
+                margin: 0 10% 0 10%;
+                padding-left: 2%;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 260px;
+                border: white;
+                margin-bottom: 20px;
+                overflow: hidden;
+            }
+            .card-img-top{
+                width: 100%;
+                height: 260px;
+                object-fit:cover;
+                transform:scale(1.0);
+                transition: transform .2s;
+            }
+            .card-img-top:hover{            /* 마우스 호버시 */
+                transform:scale(1.1);            /* 이미지 확대 */
+                transition: transform .2s; 	/*  시간 설정  */
+            }
+            #like-btn{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 35%;
+                right: 5%
+            }
+        }
+        .red{
+            fill: rgba( 255, 69, 0, 1 );
+        }
+        .white{
+            fill: rgba( 255, 255, 255, 0.7 );
+            stroke: white;
+        }
+        .red:hover{
+            fill: rgba( 255, 69, 0, 0.7 );
+        }
+        .white:hover{
+            fill: rgba( 255, 255, 255, 0.5 );
+        }
+    </style>
 </head>
 <body>
 <hr>
-<button id="wb">AJAX Test</button>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+        <div class="row">
+
+        </div>
+    </div>
 <div></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
