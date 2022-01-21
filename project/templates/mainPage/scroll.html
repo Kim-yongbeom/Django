@@ -10,14 +10,18 @@
     <script type="text/javascript">
         $(function () {
             let index = 0;
+            var bool_sw = true;
             $(window).scroll(function () {
                 let $window = $(this);
                 let scrollTop = $window.scrollTop();
                 let windowHeight = $window.height();
                 let documentHeight = $(document).height();
                 if (scrollTop + windowHeight +1 >= documentHeight){
-                    index++;
+                    index += 20;
+                    console.log(index)
+                    if(bool_sw){
                     setTimeout(fetchlist,200);
+                    }
                 }
             })
             allGoods = []
@@ -25,7 +29,14 @@
                 $.ajax({
                     url : "/target",
                     success : function (json) {
-                        for (i=0; i<JSON.parse(json.goods)[JSON.parse(json.goods).length - 1].pk; i++){
+                        for (i=index-20; i<index; i++){
+                            if (i >= JSON.parse(json.goods)[JSON.parse(json.goods).length - 1].pk){
+                                if (index == (i+20)){
+                                    alert('마지막 상품입니다!!')
+                                }
+                                index = i
+                                break;
+                            }
                             allGoods.push(JSON.parse(json.goods)[i].fields)
                             $('.row').append(
                                 `
