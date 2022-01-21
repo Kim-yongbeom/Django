@@ -1,4 +1,4 @@
-# aws, 우분투, 파이참에 aws 연결
+# aws, 우분투, 파이참에 aws 연결!!
 
 ### 1. aws ec2연결 (+ chrome확장app설치, secure shell, mac은 터미널에서!! 본인이 받은 키폴더 안에서 ssh -i ~ 넣기)
 
