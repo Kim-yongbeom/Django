@@ -1,4 +1,4 @@
-# aws, 우분투
+# aws, 우분투, 파이참에 aws
 
 ### 1. aws ec2연결 (+ chrome확장app설치, secure shell, mac은 터미널에서!! 본인이 받은 키폴더 안에서 ssh -i ~ 넣기)
 
@@ -89,12 +89,19 @@
 ### S3
   
 ![screencapture-s3-console-aws-amazon-s3-bucket-create-2022-01-20-16_42_57](https://user-images.githubusercontent.com/89058117/150295599-6d4866ff-b174-4478-a7cb-2c4e8fcb6a9c.png)
+  
+  
+  - 업로드 할 때 설정!!
+  <img width="842" alt="스크린샷 2022-01-21 오전 10 44 24" src="https://user-images.githubusercontent.com/89058117/150450531-11e0c026-0866-4c03-9bae-f1f20c0642b1.png">
+
+  
 
 ### I AM 사용자 추가하기
 
 <img width="1440" alt="스크린샷 2022-01-20 오후 4 47 19" src="https://user-images.githubusercontent.com/89058117/150296059-9fe45003-923b-4266-9acd-ccc0c5285b38.png">
 <img width="1440" alt="스크린샷 2022-01-20 오후 4 48 10" src="https://user-images.githubusercontent.com/89058117/150296089-28473b76-4f95-47f6-9185-252c126d192a.png">
-
+- 그룹 만들어주고 사용자 새로 만들어 줌 마지막에 csv파일로 저장하는거 있다. 그걸로 저장해주면 키 관리 편함
+  
 ### RDS 만들어준거 DBeaver에 연결
 - 엔드포인트 복사해서 서버 호스트에 붙이기
 - RDS에서 설정해준 비밀번호 입력
@@ -118,7 +125,18 @@
 - 인스턴스 아이디 -> 보안 -> 보안그룹 확인 (launch-wizard-8)
 - 네트워크 및 보안 -> 보안그룹 -> 보안그룹 동일한 이름 확인 후 클릭 -> 인바운드 규칙 편집
 <img width="1400" alt="스크린샷 2022-01-20 오후 6 30 35" src="https://user-images.githubusercontent.com/89058117/150311721-564cf6db-c845-40ea-92b0-3de048c93055.png">
+  
+  
+  ## 파이참에 연결
+  - 자세한 코드는 project 폴더에서 확인!!
+  
 
   
+  ### 파이참에 설치할 라이브러리
+  - pip install boto3 
+  - pip install django-storages
   
   
+  ### static에 있는 파일들 다 올리는 명령어
+  - python ./manage.py collectstatic
+  - s3에 올라와 있는것을 확일할 수 있다.
