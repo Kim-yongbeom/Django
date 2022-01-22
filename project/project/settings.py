@@ -78,18 +78,16 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    'default' : {
-
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#
+# }
 
 
 # Password validation
@@ -128,6 +126,7 @@ USE_TZ = True
 # 파일의 끝에 AWS 관련 내용을 추가
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -140,6 +139,6 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-
+# STATICFILES_STORAGE = 'project.storage.S3StaticStorage' # storage생성해준 다음 작성!!
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
