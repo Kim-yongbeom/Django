@@ -10,21 +10,22 @@
     <script type="text/javascript">
         $(function () {
             let index = 0;
+            allGoods = []
             var bool_sw = true;
             $(window).scroll(function () {
                 let $window = $(this);
                 let scrollTop = $window.scrollTop();
                 let windowHeight = $window.height();
                 let documentHeight = $(document).height();
-                if (scrollTop + windowHeight +1 >= documentHeight){
-                    index += 20;
-                    console.log(index)
+                if (scrollTop + windowHeight  >= documentHeight){
                     if(bool_sw){
-                    setTimeout(fetchlist,200);
+                        index += 20;
+                        console.log(index)
+                        setTimeout(fetchlist,500);
                     }
                 }
             })
-            allGoods = []
+
             function fetchlist () {
                 $.ajax({
                     url : "/target",

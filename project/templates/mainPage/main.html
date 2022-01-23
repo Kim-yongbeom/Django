@@ -25,15 +25,108 @@
           slideMargin: 10,
           onSliderLoad: function(){ $("#edd").css("visibility", "visible").animate({opacity:1}); }
         });
-      const icoHearts = document.querySelectorAll('.heart')
-        icoHearts.forEach(heart => {
-            heart.addEventListener('click',()=>{
-                heart.classList.toggle('active')
-                heart.classList.contains('active')
-                    ? heart.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
-                    : heart.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
-            })
+        // 무한스크롤
+        let index = 0;
+        allGoods = []
+        var bool_sw = true;
+        $(window).scroll(function () {
+            let $window = $(this);
+            let scrollTop = $window.scrollTop();
+            let windowHeight = $window.height();
+            let documentHeight = $(document).height();
+            if (scrollTop + windowHeight  >= documentHeight){
+                if(bool_sw){
+                    index += 20;
+                    console.log(index)
+                    setTimeout(fetchlist,200);
+                }
+            }
         })
+
+        function fetchlist () {
+            $.ajax({
+                url : "/target",
+                success : function (json) {
+                    // 상품 20개씩 보여주기
+                    for (i=index-20; i<index; i++){
+                        if (i >= JSON.parse(json.goods)[JSON.parse(json.goods).length - 1].pk){
+                            if (index == (i+20)){
+                                alert('마지막 상품입니다!!')
+                            }
+                            index = i
+                            break;
+                        }
+                        allGoods.push(JSON.parse(json.goods)[i].fields)
+                        $('.row').append(
+                            `
+                            <div class="col" >
+                                <!-- Modal -->
+                                <div class="card" style="cursor:pointer;">
+                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal${ JSON.parse(json.goods)[i].pk }">
+                                        <div class="modal fade" id="exampleModal${ JSON.parse(json.goods)[i].pk }" tabindex="-1" aria-labelledby="exampleModalLabel${ JSON.parse(json.goods)[i].pk }" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel${ JSON.parse(json.goods)[i].pk }">${ allGoods[i].title }</h5>
+                                              </div>
+                                              <div class="modal-body">
+                                                <img id="modal-img" style="width: 70%; height: 70%;" src="${ allGoods[i].imgs }">
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding-top: 1px">
+                                                    닫기
+                                                </button>
+                                                <button type="button" class="btn btn-primary" style="padding-top: 1px">
+                                                    <a id="detail-link" href="${ allGoods[i].detail }" target="_blank" style="color: white; text-decoration-line: none;">
+                                                        바로가기
+                                                    </a>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                            <div id=card-top>
+                                          <img src="${ allGoods[i].imgs }"
+                                               class="card-img-top" alt="...">
+                                            </div>
+                                          <div class="card-body">
+                                            <h5 class="card-title">${ allGoods[i].title }</h5>
+                                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                              <div class="btn category btn-primary" style="background: cornflowerblue; border:white">${ allGoods[i].category }</div>
+                                          </div>
+                                    </div>
+                                    <button type="button" id="like-btn${ JSON.parse(json.goods)[i].pk }" class="heart">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </button>
+                            </div>
+                            </div>
+                            `
+                        )
+                    }
+                    // 하트 클릭
+                    const icoHearts = document.querySelectorAll('.heart')
+                    icoHearts.forEach(heart => {
+                        heart.addEventListener('click',()=>{
+                                heart.classList.toggle('active')
+                                if (heart.classList.contains('active')){
+                                    heart.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
+                                    console.log(1)
+                                    stop()
+                                }
+                                else {
+                                    heart.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
+                                    console.log(-1)
+                                }
+                        })
+                    })
+                },
+                error : function () {
+                    alert('ajax 오류!')
+                }
+            })
+        }
      })
     </script>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
@@ -73,7 +166,7 @@
                 width: 161px;
                 height: 161px;
             }
-            #like-btn{
+            .heart{
                 background-color: rgba( 255, 255, 255, 0 );
                 border: 0;
                 width: 35px;
@@ -129,7 +222,7 @@
                 transform:scale(1.1);            /* 이미지 확대 */
                 transition: transform .2s; 	/*  시간 설정  */
             }
-            #like-btn{
+            .heart{
                 background-color: rgba( 255, 255, 255, 0 );
                 border: 0;
                 width: 35px;
@@ -304,6 +397,11 @@
 </article>
 
 <footer>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
     <div class="dropdown footer_dropdown">
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
         모든상품
@@ -317,52 +415,7 @@
     </div>
     <div class="container">
         <div class="row">
-        {% if goods %}
-            {% for one in goods %}
-                <div class="col" >
-                    <!-- Modal -->
-                    <div class="card" style="cursor:pointer;">
-                        <div data-bs-toggle="modal" data-bs-target="#exampleModal{{ one.id }}">
-                            <div class="modal fade" id="exampleModal{{ one.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ one.id }}" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel{{ one.id }}">{{ one.title }}</h5>
-                                  </div>
-                                  <div class="modal-body">
-                                    <img id="modal-img" style="width: 70%; height: 70%;" src="{{ one.imgs }}">
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding-top: 1px">
-                                        닫기
-                                    </button>
-                                    <button type="button" class="btn btn-primary" style="padding-top: 1px">
-                                        <a id="detail-link" href="{{ one.detail }}" target="_blank" style="color: white; text-decoration-line: none;">
-                                            바로가기
-                                        </a>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                              <img src="{{ one.imgs }}"
-                                   class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title">{{ one.title }}</h5>
-                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood1 }}</div>
-                                  <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood2 }}</div>
-                                  <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ one.mood3 }}</div>
-                                  <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ one.category }}</div>
-                              </div>
-                        </div>
-                        <button type="button" id="like-btn" class="heart">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        </button>
 
-                </div>
-                </div>
-            {% endfor %}
-        {% endif %}
         </div>
     </div>
 </footer>
