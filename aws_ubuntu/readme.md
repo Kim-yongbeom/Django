@@ -344,7 +344,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
   - pip install wheel
   - pip install django==3.2.11
   
-  ### 우분투 서버에서 새로 설치
+  - 우분투 서버에서 새로 설치
   - pip install boto3
   - pip install django-storages
   - git clone https://github.com/Kim-yongbeom/Django.git
