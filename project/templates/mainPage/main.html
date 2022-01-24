@@ -69,16 +69,18 @@
                                               <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel${ JSON.parse(json.goods)[i].pk }">${ allGoods[i].title }</h5>
                                               </div>
-                                              <div class="modal-body">
-                                                <img id="modal-img" style="width: 70%; height: 70%;" src="${ allGoods[i].imgs }">
+                                              <div class="modal-body" style="text-align: center">
+                                                <img id="modal-img" style="width: 90%; height: 90%; margin-bottom: 16px " src="${ allGoods[i].imgs }">
+                                                <br>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                                <div class="btn category btn-primary" style="background: rosybrown; border:white; width: 50px">${ allGoods[i].category }</div>
                                               </div>
                                               <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding-top: 1px">
-                                                    닫기
-                                                </button>
-                                                <button type="button" class="btn btn-primary" style="padding-top: 1px">
+                                                <button type="button" class="btn btn-primary" style="padding-top: 1px; width: 100%; background: gray; border: 0; ">
                                                     <a id="detail-link" href="${ allGoods[i].detail }" target="_blank" style="color: white; text-decoration-line: none;">
-                                                        바로가기
+                                                        사이트 바로가기
                                                     </a>
                                                 </button>
                                               </div>
@@ -94,7 +96,7 @@
                                             <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
                                               <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
                                               <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
-                                              <div class="btn category btn-primary" style="background: cornflowerblue; border:white">${ allGoods[i].category }</div>
+                                              <div class="btn category btn-primary" style="background: rosybrown; border:white">${ allGoods[i].category }</div>
                                           </div>
                                     </div>
                                     <button type="button" id="like-btn${ JSON.parse(json.goods)[i].pk }" name="${ JSON.parse(json.goods)[i].pk }" class="heart">
