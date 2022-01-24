@@ -9,3 +9,4 @@ class Good(models.Model):
     mood1 = models.CharField(max_length=200)
     mood2 = models.CharField(max_length=200)
     mood3 = models.CharField(max_length=200)
+    like = models.IntegerField()

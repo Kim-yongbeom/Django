@@ -20,6 +20,5 @@ import mainPage.views
 
 urlpatterns = [
     path('', mainPage.views.main),
-    path('scroll', mainPage.views.scroll),
     path('target', mainPage.views.target),
 ]
