@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<div id="result" class="container">
+    <div class="row">
+        {% if mbti %}
+            {% for d in data  %}
+                <div class="col">
+                    <div class="card" style="width: 10.2rem;">
+                        <img src="{{ d.mood_pic }}"
+                             class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ d.name }}</h5>
+                            <p class="card-text">♥️ 좋아요 {{ d.likes }}</p>
+                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ d.mood1}}</div>
+                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ d.mood2 }}</div>
+                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ d.mood3}}</div>
+                            <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ d.category }}</div></div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+</html>

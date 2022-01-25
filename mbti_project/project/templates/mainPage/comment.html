@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if data %}
+    {% for comments in data %}
+        <span>{{ comments.writer }}</span>
+        <span>{{ comments.content }}</span>
+    {% endfor %}
+{% else %}
+    <span>댓글 방지 위원회 두둥등장!</span>
+{% endif %}
+hihi
+</body>
+</html>
