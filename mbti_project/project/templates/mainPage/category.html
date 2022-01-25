@@ -14,29 +14,9 @@
     <script>
     var curr_url = document.location.href;
     var para = curr_url.split("/");
-    var curr_href = para[para.length-1]
-
-    $('.product-mbti').click(function () {
-
-        product = $(this).attr('value')
-        console.log(product)
-        $.ajax({
-            url : "/mbti3",
-            data : {
-                mbti: curr_href,
-                no2: product,
-            },
-
-            success : function (doc) {
-
-                $('#result').html(doc)
-            },
-            error : function () {
-                alert('ajax 오류!')
-            }
-        })
-    })
-
+    var curr_href1 = para[para.length-1]
+    var curr_href2 = para[para.length-2]
+    console.log(curr_href1)
 
     $(document).ready(function(){
         // 무한스크롤
@@ -61,12 +41,13 @@
             $.ajax({
                 url : "/target3",
                 data : {
-                    mbti: curr_href
+                    mbti: curr_href2,
+                    category: curr_href1
                 },
                 success : function (json) {
                 // 상품 20개씩 보여주기
                     for (i=index-20; i<index; i++){
-                        if (i >= JSON.parse(json.data)[JSON.parse(json.data).length - 1]){
+                        if (i >= JSON.parse(json.data)[JSON.parse(json.data).length - 1].pk){
                             if (index == (i+20)){
                                 alert('마지막 상품입니다!!')
                             }
@@ -358,14 +339,14 @@
       </a>
 
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Cafe24SsurroundAir'; font-weight: bold">
-        <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/테이블">테이블</a></li>
-        <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/침대">침대</a></li>
-          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/침구류">침구류</a></li>
-          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/조명">조명</a></li>
-          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/의자">의자</a></li>
-          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/거울">거울</a></li>
-          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/수납장">수납장</a></li>
-          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/러그">러그</a></li>
+        <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/table">테이블</a></li>
+        <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/bed">침대</a></li>
+          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/bedding">침구류</a></li>
+          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/light">조명</a></li>
+          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/chair">의자</a></li>
+          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/mirror">거울</a></li>
+          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/closet">수납장</a></li>
+          <li><a class="dropdown-item product-mbti" href="/mbti/{{ mbti_one }}/rug">러그</a></li>
       </ul>
     </div>
 {#    <div>#}

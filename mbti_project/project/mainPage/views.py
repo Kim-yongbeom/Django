@@ -51,14 +51,31 @@ def target2(request):
     return JsonResponse(context)
 
 def target3(request):
+
     mbti = request.GET.get('mbti')
     category = request.GET.get('category')
+
+    if category == 'table':
+        category = '테이블'
+    elif category =='bed':
+        category = '침대'
+    elif category == 'bedding':
+        category = '침구류'
+    elif category == 'light':
+        category = '조명'
+    elif category == 'chair':
+        category = '의자'
+    elif category == 'mirror':
+        category = '거울'
+    elif category == 'closet':
+        category = '수납장'
+    elif category == 'rug':
+        category = '러그'
+
     for i in mbti_list:
         if mbti == i:
-            data = Product.objects.filter(category=category).order_by('-',i)
-
+            data = Product.objects.filter(category=category).order_by('-'+ i)
     context = {
-                'mbti' : mbti,
                 'data' : serializers.serialize('json', data),
                }
     # print(serializers.serialize('json', goods_list))
