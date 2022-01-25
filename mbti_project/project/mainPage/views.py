@@ -14,6 +14,8 @@ mbti_list = ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ',
                  'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP',
                  'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP']
 
+category_list = ['테이블','침대','침구류','조명','의자','거울','수납장','러그']
+
 def main(request):
     print('mainPage 호출됨')
     goods_list = Product.objects.all()
@@ -28,11 +30,36 @@ def main(request):
                }
     return render(request, 'mainPage/main.html',context)
 
-def target(request):
+def target1(request):
     goods_list = Product.objects.all()
 
     context = {
                'goods': serializers.serialize('json', goods_list),
+               }
+    # print(serializers.serialize('json', goods_list))
+    return JsonResponse(context)
+
+def target2(request):
+    mbti = request.GET.get('mbti')
+    for i in mbti_list:
+        if mbti == i:
+            data = Product.objects.all().order_by('-' + i)
+
+    context = {
+                'data' : serializers.serialize('json', data),
+               }
+    return JsonResponse(context)
+
+def target3(request):
+    mbti = request.GET.get('mbti')
+    category = request.GET.get('category')
+    for i in mbti_list:
+        if mbti == i:
+            data = Product.objects.filter(category=category).order_by('-',i)
+
+    context = {
+                'mbti' : mbti,
+                'data' : serializers.serialize('json', data),
                }
     # print(serializers.serialize('json', goods_list))
     return JsonResponse(context)
@@ -233,6 +260,7 @@ def mbti(request, mbti):
     likes = data.values('likes')
     context = {
             'mbti': mbti_list,
+            'mbti_one' : mbti,
             'data': list(data),
             'name': name,
             'mood' : mood,
@@ -247,62 +275,25 @@ def mbti(request, mbti):
 
     return render(request, 'mainPage/mbti.html',context)
 
-
-
-def mbti2(request):
-    mbti = request.GET.get('mbti')
+def category(request, mbti, category):
+    mbti = mbti
+    category = category
     for i in mbti_list:
         if mbti == i:
             data = Product.objects.all().order_by('-'+i)
-    # # print('---------------', data)
-    # no = no
+
     name = data.values('name')
-    mood = list(data.values('mood'))
     mood1 = data.values('mood1')
     mood2 = data.values('mood2')
     mood3 = data.values('mood3')
-    category = data.values('category')
+    category = category
     mood_pic = data.values('mood_pic')
     detail_pic = data.values('detail_pic')
     likes = data.values('likes')
     context = {
             'mbti': mbti_list,
-            'mbti' : mbti,
-            'data' : list(data),
-            'name': name,
-            'mood' : mood,
-            'category' :  category,
-            'mood_pic' : mood_pic,
-            'detail_pic': detail_pic,
-            'likes' : likes,
-            'mood1': mood1,
-            'mood2': mood2,
-            'mood3': mood3,
-        }
-    return render(request, 'mainPage/mbti2.html',context)
-
-
-
-def mbti3(request):
-    mbti = request.GET.get('mbti')
-    no2 = request.GET.get('no2')
-    for i in mbti_list:
-        if mbti == i:
-            data = Product.objects.filter(category=no2).order_by('-'+i)
-    no2 = no2
-    name = data.values('name')
-    mood = list(data.values('mood'))
-    mood1 = data.values('mood1')
-    mood2 = data.values('mood2')
-    mood3 = data.values('mood3')
-    category = data.values('category')
-    mood_pic = data.values('mood_pic')
-    detail_pic = data.values('detail_pic')
-    likes = data.values('likes')
-    context = {
-        'mbti': mbti_list,
-             'no2' : no2,
-            'data' : list(data),
+            'mbti_one' : mbti,
+            'data': list(data),
             'name': name,
             'mood' : mood,
             'category' :  category,
@@ -314,8 +305,7 @@ def mbti3(request):
             'mood3': mood3,
         }
 
-    return render(request, 'mainPage/mbti3.html',context)
-
+    return render(request, 'mainPage/category.html',context)
 
 
 

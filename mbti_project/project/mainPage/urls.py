@@ -20,16 +20,15 @@ import mainPage.views
 
 urlpatterns = [
     path('', mainPage.views.main),
-    path('target', mainPage.views.target),
-
+    path('target1', mainPage.views.target1),
+    path('target2', mainPage.views.target2),
+    path('target3', mainPage.views.target3),
     path('visual', mainPage.views.visual, name='visual'),
     path('mood/<int:no>', mainPage.views.mood, name='mood'),
     path('mood2', mainPage.views.mood2),
     path('mood3', mainPage.views.mood3),
     path('mbti/<mbti>', mainPage.views.mbti),
-    path('mbti2', mainPage.views.mbti2),
-    path('mbti3', mainPage.views.mbti3),
-
+    path('mbti/<mbti>/<category>', mainPage.views.category),
     path('community', mainPage.views.community),
     path('comment', mainPage.views.comment),
 ]

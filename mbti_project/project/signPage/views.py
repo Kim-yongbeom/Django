@@ -1,7 +1,7 @@
-from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from signPage.models import User
+from django.contrib import messages
 
 # Create your views here.
 def signUp(request):
@@ -51,7 +51,7 @@ def signIn2(request):
                 request.session['user'] = myUser.id
                 print('userSession---> ', request.session['user'])
                 messages.success(request, "로그인성공!!")
-                return render(request, 'mainPage/signIn.html', context)
+                return render(request, 'mainPage/main.html', context)
             else:
                 messages.error(request, "비밀번호가 틀렸습니다!!")
                 return render(request, 'signPage/signIn.html')
@@ -96,4 +96,4 @@ def userUpdate2(request):
             'usermbti': usermbti
         }
         messages.success(request, "수정완료 되었습니다!!")
-        return render(request, 'mainPage/signIn.html', context)
+        return render(request, 'mainPage/main.html', context)
