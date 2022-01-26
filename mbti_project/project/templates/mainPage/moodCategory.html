@@ -14,7 +14,8 @@
     <script>
     var curr_url = document.location.href;
     var para = curr_url.split("/");
-    var curr_href = para[para.length-1]
+    var curr_href1 = para[para.length-1]
+    var curr_href2 = para[para.length-2]
 
 
     {#var hrefValue = window.location.search#}
@@ -22,9 +23,10 @@
 
     $(document).ready(function(){
         $.ajax({
-            url : "/mood2",
+            url : "/mood3",
             data : {
-                mood: curr_href
+                mood: curr_href2,
+                category: curr_href1
             },
             success : function (json) {
             // 상품 20개씩 보여주기
@@ -121,9 +123,10 @@
 
         function fetchlist () {
             $.ajax({
-                url : "/mood2",
+                url : "/mood3",
                 data : {
-                    mood: curr_href
+                    mood: curr_href2,
+                    category: curr_href1
                 },
                 success : function (json) {
                 // 상품 20개씩 보여주기

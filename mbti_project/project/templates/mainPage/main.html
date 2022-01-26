@@ -58,9 +58,6 @@
                     // 상품 20개씩 보여주기
                     for (i=index-20; i<index; i++){
                         if (i >= JSON.parse(json.goods)[JSON.parse(json.goods).length - 1].pk){
-                            if (index == (i+20)){
-                                alert('마지막 상품입니다!!')
-                            }
                             index = i
                             break;
                         }
@@ -338,14 +335,14 @@
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
            style="color: #333; margin-top: 2px" role="button" aria-expanded="false">무드</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item mood" href="mood/1">미니멀</a></li>
-          <li><a class="dropdown-item mood" href="mood/2">모던</a></li>
-          <li><a class="dropdown-item mood" href="mood/3">개성</a></li>
-          <li><a class="dropdown-item mood" href="mood/4">내추럴</a></li>
-          <li><a class="dropdown-item mood" href="mood/5">빈티지</a></li>
-          <li><a class="dropdown-item mood" href="mood/6">로맨틱</a></li>
-          <li><a class="dropdown-item mood" href="mood/7">실용적</a></li>
-          <li><a class="dropdown-item mood" href="mood/8">캐주얼</a></li>
+          <li><a class="dropdown-item mood" href="/mood/1">미니멀</a></li>
+          <li><a class="dropdown-item mood" href="/mood/2">모던</a></li>
+          <li><a class="dropdown-item mood" href="/mood/3">개성</a></li>
+          <li><a class="dropdown-item mood" href="/mood/4">내추럴</a></li>
+          <li><a class="dropdown-item mood" href="/mood/5">빈티지</a></li>
+          <li><a class="dropdown-item mood" href="/mood/6">로맨틱</a></li>
+          <li><a class="dropdown-item mood" href="/mood/7">실용적</a></li>
+          <li><a class="dropdown-item mood" href="/mood/8">캐주얼</a></li>
         </ul>
       </li>
 

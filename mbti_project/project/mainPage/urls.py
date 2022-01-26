@@ -24,11 +24,12 @@ urlpatterns = [
     path('target2', mainPage.views.target2),
     path('target3', mainPage.views.target3),
     path('visual', mainPage.views.visual, name='visual'),
-    path('mood/<int:no>', mainPage.views.mood, name='mood'),
+    path('mood/<int:mood>', mainPage.views.mood, name='mood'),
     path('mood2', mainPage.views.mood2),
     path('mood3', mainPage.views.mood3),
     path('mbti/<mbti>', mainPage.views.mbti),
     path('mbti/<mbti>/<category>', mainPage.views.category),
+    path('mood/<int:mood>/<category>', mainPage.views.moodCategory),
     path('community', mainPage.views.community),
     path('comment', mainPage.views.comment),
 ]
