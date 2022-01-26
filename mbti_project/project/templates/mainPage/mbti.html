@@ -22,9 +22,88 @@
     {#console.log(param)#}
 
     $(document).ready(function(){
+        $.ajax({
+            url : "/target2",
+            data : {
+                mbti: curr_href
+            },
+            success : function (json) {
+            // 상품 20개씩 보여주기
+                for (i=0; i<20; i++){
+                    allGoods.push(JSON.parse(json.data)[i].fields)
+                    {#console.log(allGoods)#}
+                    $('.row').append(
+                        `
+                        <div class="col" >
+                            <!-- Modal -->
+                            <div class="card" style="cursor:pointer;">
+                                <div data-bs-toggle="modal" data-bs-target="#exampleModal${ JSON.parse(json.data)[i].pk }">
+                                    <div class="modal fade" id="exampleModal${ JSON.parse(json.data)[i].pk }" tabindex="-1" aria-labelledby="exampleModalLabel${ JSON.parse(json.data)[i].pk }" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel${ JSON.parse(json.data)[i].pk }">${ allGoods[i].name }</h5>
+                                          </div>
+                                          <div class="modal-body" style="text-align: center">
+                                            <img id="modal-img" style="width: 90%; height: 90%; margin-bottom: 16px " src="${ allGoods[i].mood_pic }">
+                                            <br>
+                                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                            <div class="btn category btn-primary" style="background: rosybrown; border:white; width: 50px">${ allGoods[i].category }</div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" style="padding-top: 1px; width: 100%; background: gray; border: 0; ">
+                                                <a id="detail-link" href="${ allGoods[i].detail_pic }" target="_blank" style="color: white; text-decoration-line: none;">
+                                                    사이트 바로가기
+                                                </a>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                        <div id=card-top>
+                                      <img src="${ allGoods[i].mood_pic }"
+                                           class="card-img-top" alt="...">
+                                        </div>
+                                      <div class="card-body">
+                                        <h5 class="card-title">${ allGoods[i].name }</h5>
+                                        <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                          <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                          <div class="btn category btn-primary" style="background: rosybrown; border:white">${ allGoods[i].category }</div>
+                                      </div>
+                                </div>
+                                <button type="button" id="like-btn${ JSON.parse(json.data)[i].pk }" name="${ JSON.parse(json.data)[i].pk }" class="heart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </button>
+                        </div>
+                        </div>
+                        `
+                    )
+                }
+                // 하트 클릭
+                $(".heart").unbind("click");
+                $('.heart').bind('click',function(){
+                      if($(this).hasClass('active')){
+                          $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                          $('.heart').removeClass('active');
+                          console.log(-1)
+                      } else {
+                          $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                          $('.heart').removeClass('active');
+                          $(this).addClass('active');
+                          console.log(1)
+                      }
+                });
+            },
+            error : function () {
+                alert('ajax 오류!')
+            }
+        })
 
         // 무한스크롤
-        let index = 0;
+        let index = 20;
         allGoods = []
         var bool_sw = true;
         $(window).scroll(function () {
@@ -51,7 +130,7 @@
                 success : function (json) {
                 // 상품 20개씩 보여주기
                     for (i=index-20; i<index; i++){
-                        if (i >= JSON.parse(json.data)[JSON.parse(json.data).length - 1].pk){
+                        if (i >= JSON.parse(json.data).length){
                             if (index == (i+20)){
                                 alert('마지막 상품입니다!!')
                             }
@@ -357,25 +436,10 @@
 {#        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 15.5h-1.5V14h-1v3H8v-3H7v4.5H5.5v-5c0-.55.45-1 1-1H11c.55 0 1 .45 1 1v5zm3.5 0H14v-6h3.5c.55 0 1 .45 1 1V16c0 .55-.45 1-1 1h-2v1.5zM10 5.5v6H8.5V7H7V5.5h3zm7.5 4.5h-1v1.5H15V10h-3V5.5h1.5v3H15v-3h1.5v3h1V10zm-2 4H17v1.5h-1.5z"/></svg>#}
 {#    </div>#}
     <div id="result" class="container">
-{#    <hr>#}
-    {% if mbti %}
+
+    {% if data %}
         <div class="row">
-             {% for d in data  %}
-                 <div class="col">
-                     <div class="card" style="width: 10.2rem;">
-                         <img src="{{ d.mood_pic }}"
-                       class="card-img-top" alt="...">
-                         <div class="card-body">
-                            <h5 class="card-title">{{ d.name }}</h5>
-                            <p class="card-text">♥️ 좋아요 {{ d.likes }}</p>
-                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ d.mood1}}</div>
-                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ d.mood2 }}</div>
-                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">{{ d.mood3}}</div>
-                            <div class="btn category btn-primary" style="background: cornflowerblue; border:white">{{ d.category }}</div>
-                        </div>
-                    </div>
-                 </div>
-            {% endfor %}
+
         </div>
     {% endif %}
     </div>

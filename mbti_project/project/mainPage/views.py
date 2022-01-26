@@ -44,7 +44,6 @@ def target2(request):
     for i in mbti_list:
         if mbti == i:
             data = Product.objects.all().order_by('-' + i)
-
     context = {
                 'data' : serializers.serialize('json', data),
                }
@@ -266,7 +265,7 @@ def mbti(request, mbti):
     for i in mbti_list:
         if mbti == i:
             data = Product.objects.all().order_by('-'+i)
-
+    # print(list(data.values('id')))
     name = data.values('name')
     mood1 = data.values('mood1')
     mood2 = data.values('mood2')
