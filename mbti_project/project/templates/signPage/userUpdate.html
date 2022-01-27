@@ -19,9 +19,6 @@
 }, 4000);
 </script>
     <style>
-        .dropdown-item{
-            width: 100%;
-        }
         @media screen and (max-width: 500px) {
             .pc-menu{
                 visibility: hidden;
@@ -173,7 +170,7 @@
 <header>
     <nav class="navbar navbar-light bg-light" style="padding-bottom: 8px">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img src="{% static 'KakaoTalk_Photo_2022-01-18-15-42-07.jpeg' %}"
                alt="" width="50" height="50" class="img-fluid rounded">
         </a>
@@ -217,7 +214,7 @@
             {% for one in mbti %}
                 <a id="mbti_16" >
 {#                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163572945028172903.png?gif=1&w=180&h=180&c=c">#}
-                    <li ><a class="dropdown-item" href='mbti/{{ one }}' style="text-align: center; " >{{ one }}</a></li>
+                    <li ><a class="dropdown-item" href='/mbti/{{ one }}' style="text-align: center; " >{{ one }}</a></li>
                 </a>
             {% endfor %}
 
@@ -227,14 +224,14 @@
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
            style="color: #333; margin-top: 2px" role="button" aria-expanded="false">무드</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item mood" href="mood/1">미니멀</a></li>
-          <li><a class="dropdown-item mood" href="mood/2">모던</a></li>
-          <li><a class="dropdown-item mood" href="mood/3">개성</a></li>
-          <li><a class="dropdown-item mood" href="mood/4">내추럴</a></li>
-          <li><a class="dropdown-item mood" href="mood/5">빈티지</a></li>
-          <li><a class="dropdown-item mood" href="mood/6">로맨틱</a></li>
-          <li><a class="dropdown-item mood" href="mood/7">실용적</a></li>
-          <li><a class="dropdown-item mood" href="mood/8">캐주얼</a></li>
+          <li><a class="dropdown-item mood" href="/mood/1">미니멀</a></li>
+          <li><a class="dropdown-item mood" href="/mood/2">모던</a></li>
+          <li><a class="dropdown-item mood" href="/mood/3">개성</a></li>
+          <li><a class="dropdown-item mood" href="/mood/4">내추럴</a></li>
+          <li><a class="dropdown-item mood" href="/mood/5">빈티지</a></li>
+          <li><a class="dropdown-item mood" href="/mood/6">로맨틱</a></li>
+          <li><a class="dropdown-item mood" href="/mood/7">실용적</a></li>
+          <li><a class="dropdown-item mood" href="/mood/8">캐주얼</a></li>
         </ul>
       </li>
       <li class="nav-item">
@@ -317,7 +314,7 @@
         <tr>
             <td>연령대</td>
             <td><select name = "age">
-                <option value="10대이하" {% if one.age == '10대이하' %}selected{% endif %}>10대 이하</option>
+                <option value="10대" {% if one.age == '10대' %}selected{% endif %}>10대</option>
                 <option value="20대" {% if one.age == '20대' %}selected{% endif %}>20대</option>
                 <option value="30대" {% if one.age == '30대' %}selected{% endif %}>30대</option>
                 <option value="40대" {% if one.age == '40대' %}selected{% endif %}>40대</option>

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script><script type="text/css" src="{% static 'main.css' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
     <script>
         window.setTimeout(function() {
     $(".alert-auto-dismissible").fadeTo(500, 0).slideUp(500, function(){
@@ -17,11 +19,7 @@
     });
 }, 4000);
 </script>
-    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
     <style>
-        .dropdown-item{
-            width: 100%;
-        }
         @media screen and (max-width: 500px) {
             .pc-menu{
                 visibility: hidden;
@@ -178,33 +176,18 @@
                alt="" width="50" height="50" class="img-fluid rounded">
         </a>
           <div id="auth" style="display: flex;">
-              {% if request.session.user %}
-                  <div class="pc-menu">
-                    <span>당신의 mbti는 {{ usermbti }}입니다.</span>
-                    <a class="dropdown-item" href="/signPage/logOut">로그아웃</a>
-                    <a class="dropdown-item" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a>
-                </div>
-                  {% else %}
                 <div class="pc-menu" style="display: flex;">
                   <a class="dropdown-item" href="/signPage/signIn">로그인</a>
                   <a class="dropdown-item" href="/signPage/signUp">회원가입</a>
                 </div>
-              {% endif %}
                 <div class="btn-group dropstart">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPUAAADNCAMAAABXRsaXAAAAaVBMVEUAAAD////6+vrw8PAfHx8cHBz19fXn5+czMzNSUlLz8/MRERE2NjYiIiJsbGzGxsZ1dXW/v7/W1tZ/f3/Jyck1NTWurq5zc3NoaGgtLS21tbVfX1/j4+M9PT3BwcFaWlpOTk6Hh4eVlZXOBACRAAAD7UlEQVR4nO2d63aqMBBGC2i4KCJgsfTUS33/h+zpsoYkBPWHZNaab/YTfHvVJiGZTN4iRN6oA5Ag1gZFwoPiWeuk2/erNy6s+n2XPLSuc+qcM5DXd62rjDrgTPTHSWu1oQ43Ix/Kb50uqZPNyjL1WTfUsWanGVun1JkCkLrWakEdKQBL5VhzHsgGPmzrijpPII6WNdd52iUzrWvqNMGoDWuOy1A/+WCdUGcJSKKtO+ooAem09ZY6SkD22hplBP+l19Z8NhEes7pZK+okQSn+rJGG8Osgjve3VtD/19GaOkpA3rV1Sx0lIK22/qSOEpBPbY00nBXDN9c/6izBOBlfmjvqMMGozL2UA3WaQBysHST+m+FXGnuPFGPyap2d4RjhN76OHeuooI4UAH2QPZxzpexX41/R2DpSvH/kB6Nawzq1/6ZONiPfcTRhHTVcN8bzxvJ061KaPXXAGdg0jqWn8qq65Fm54EGZ5ZfjWHGyyi7mwJSc1BbiINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ4T1tQlUy/jWeukbvOSuhrwZZR5W6cPrXcn6pwzcKruWu+4Fkuvd9PWnDsNbCesU96tkPydvr4Qb0BAdvqK36kjBSBzbzZxvAIwZmNbo1xP3VnWXOdpl7VpfaROEwyz0xfkrXOkNjFDpy/MbhKc198uW22NsEK5kWlr9itwA9BOX7fuT0hDuHT6ok4SEMxOXxn4fI25NkMaxId1OOY3F+j3NeZeCui+GcjktXd2hmOElcpoPxzz7APgnGvl7fSV8qlQ8FF6zzQj3s0Lp86vI8a1Coc7tQq/3hwXp6edY+mrQfo+9dQ5X0Z/auvHrw3+QV0m9jL8elJbiINY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4TFlTV0y9iKet4+Pl3JdLHpT9+VKP3UcVlRvqasAZ+LhfUdmcqQPOxHn6ndyYc6V0O/EmcsH76sc68Vl/UceaHc8NCIS7mqN37TFvNnEeyAa2tnVDnScQjWXN9ZaLy8G0rqjTBKMyrDle7PFj3DpHaphSaGvMbhIY09aVVlsjrFBuSKcvIKTTFw4F9P91lFFHCUivrTGapVwZOn111FEC0mlrpEHc6PTF8ZEPP7nxpVlThwmG1ekLpeduZu0goXT6quw9Uo6HemOc1xAixbsJ0pWFcqxRO33x3xIfTnNxOn0tJjp9Kc5D2kZFfuv/ExjXeTuzX2Nz61JqjovTvHYsPZ2+um3GZ5thlW27pzt9qYQHyq8ntYU4YFr/ACZxfL6iNSmvAAAAAElFTkSuQmCC"
                          class="menu btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
                          style="width: 20px; height: 17px; padding: 0; margin-right: 10px; border: 0">
-                    {% if request.session.user %}
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a class="dropdown-item" href="/signPage/logOut">로그아웃</a></li>
-                    <li><a class="dropdown-item" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a></li>
-                  </ul>
-                    {% else %}
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <li><a class="dropdown-item" href="/signPage/signIn">로그인</a></li>
                     <li><a class="dropdown-item" href="/signPage/signUp">회원가입</a></li>
                   </ul>
-                    {% endif %}
                 </div>
             </div>
       </div>
@@ -217,24 +200,23 @@
             {% for one in mbti %}
                 <a id="mbti_16" >
 {#                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163572945028172903.png?gif=1&w=180&h=180&c=c">#}
-                    <li ><a class="dropdown-item" href='mbti/{{ one }}' style="text-align: center; " >{{ one }}</a></li>
+                    <li ><a class="dropdown-item" href='/mbti/{{ one }}' style="text-align: center; " >{{ one }}</a></li>
                 </a>
             {% endfor %}
-
         </ul>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
            style="color: #333; margin-top: 2px" role="button" aria-expanded="false">무드</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item mood" href="mood/1">미니멀</a></li>
-          <li><a class="dropdown-item mood" href="mood/2">모던</a></li>
-          <li><a class="dropdown-item mood" href="mood/3">개성</a></li>
-          <li><a class="dropdown-item mood" href="mood/4">내추럴</a></li>
-          <li><a class="dropdown-item mood" href="mood/5">빈티지</a></li>
-          <li><a class="dropdown-item mood" href="mood/6">로맨틱</a></li>
-          <li><a class="dropdown-item mood" href="mood/7">실용적</a></li>
-          <li><a class="dropdown-item mood" href="mood/8">캐주얼</a></li>
+          <li><a class="dropdown-item mood" href="/mood/1">미니멀</a></li>
+          <li><a class="dropdown-item mood" href="/mood/2">모던</a></li>
+          <li><a class="dropdown-item mood" href="/mood/3">개성</a></li>
+          <li><a class="dropdown-item mood" href="/mood/4">내추럴</a></li>
+          <li><a class="dropdown-item mood" href="/mood/5">빈티지</a></li>
+          <li><a class="dropdown-item mood" href="/mood/6">로맨틱</a></li>
+          <li><a class="dropdown-item mood" href="/mood/7">실용적</a></li>
+          <li><a class="dropdown-item mood" href="/mood/8">캐주얼</a></li>
         </ul>
       </li>
       <li class="nav-item">

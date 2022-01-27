@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script><script type="text/css" src="{% static 'main.css' %}"></script>
+    <script>
+        window.setTimeout(function() {
+            $(".alert-auto-dismissible").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 4000);
+    </script>
+    <script>
+        $(document).ready(function(){
+            {#자동슬라이드#}
+            $('.bxslider').bxSlider({ // 클래스명 주의!
+                auto: true, // 자동으로 애니메이션 시작
+                speed: 500,  // 애니메이션 속도
+                pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+                pager: true, // 페이지 표시 보여짐
+                controls: false,
+                minSlides: 3,
+                maxSlides: 3,
+                slideWidth: 360,
+                slideMargin: 10,
+                onSliderLoad: function(){ $("#edd").css("visibility", "visible").animate({opacity:1}); }
+            });
+            // 자동슬라이드2
+            $('#bxslider2').bxSlider({ // 클래스명 주의!
+                auto: true, // 자동으로 애니메이션 시작
+                speed: 500,  // 애니메이션 속도
+                pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+                pager: true, // 페이지 표시 보여짐
+                controls: false,
+                minSlides: 2,
+                maxSlides: 2,
+                slideWidth: 410,
+                slideMargin: 10,
+                onSliderLoad: function(){ $("#edd2").css("visibility", "visible").animate({opacity:1}); }
+            });
+            // 자동슬라이드3
+            $('#bxslider3').bxSlider({ // 클래스명 주의!
+                auto: true, // 자동으로 애니메이션 시작
+                speed: 500,  // 애니메이션 속도
+                pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+                pager: true, // 페이지 표시 보여짐
+                controls: false,
+                minSlides: 2,
+                maxSlides: 2,
+                slideWidth: 410,
+                slideMargin: 10,
+                onSliderLoad: function(){ $("#edd3").css("visibility", "visible").animate({opacity:1}); }
+            });
+            // 카테고리를 고르거나 모든 소품을 고를지 선택할 변수
+            a = true
+
+            $('.product').click(function () {
+                a = false
+            category = $(this).attr('value')
+            $('.category-default').html(category)
+            $.ajax({
+                url : "/target",
+                data : {
+                    category: category
+                },
+                success : function (json) {
+                // 상품 20개씩 보여주기
+                    $('.infinite').html(``)
+                    for (i=0; i<20; i++){
+
+                        allGoods.push(JSON.parse(json.data)[i].fields)
+                        {#console.log(allGoods)#}
+                        $('.infinite').append(
+                            `
+                            <div class="col" >
+                                <!-- Modal -->
+                                <div class="card" style="cursor:pointer;">
+                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal${ JSON.parse(json.data)[i].pk }">
+                                        <div class="modal fade" id="exampleModal${ JSON.parse(json.data)[i].pk }" tabindex="-1" aria-labelledby="exampleModalLabel${ JSON.parse(json.data)[i].pk }" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel${ JSON.parse(json.data)[i].pk }">${ allGoods[i].name }</h5>
+                                              </div>
+                                              <div class="modal-body" style="text-align: center">
+                                                <img id="modal-img" style="width: 90%; height: 90%; margin-bottom: 16px " src="${ allGoods[i].mood_pic }">
+                                                <br>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                                <div class="btn category btn-primary" style="background: rosybrown; border:white; width: 50px">${ allGoods[i].category }</div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" style="padding-top: 1px; width: 100%; background: gray; border: 0; ">
+                                                    <a id="detail-link" href="${ allGoods[i].detail_pic }" target="_blank" style="color: white; text-decoration-line: none;">
+                                                        사이트 바로가기
+                                                    </a>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                            <div id=card-top>
+                                          <img src="${ allGoods[i].mood_pic }"
+                                               class="card-img-top" alt="...">
+                                            </div>
+                                          <div class="card-body">
+                                            <h5 class="card-title">${ allGoods[i].name }</h5>
+                                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                              <div class="btn category btn-primary" style="background: rosybrown; border:white">${ allGoods[i].category }</div>
+                                          </div>
+                                    </div>
+                                    <button type="button" id="like-btn${ JSON.parse(json.data)[i].pk }" name="${ JSON.parse(json.data)[i].pk }" class="heart">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </button>
+                            </div>
+                            </div>
+                            `
+                        )
+                    }
+                    // 하트 클릭
+                    $(".heart").unbind("click");
+                    $('.heart').bind('click',function(){
+                          if($(this).hasClass('active')){
+                              $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                              $('.heart').removeClass('active');
+                              console.log(-1)
+                          } else {
+                              $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                              $('.heart').removeClass('active');
+                              $(this).addClass('active');
+                              console.log(1)
+                          }
+                    });
+                },
+                error : function () {
+                    alert('ajax 오류!')
+                }
+            })
+
+        // 무한스크롤
+        let index = 20;
+        allGoods = []
+        var bool_sw = true;
+        $(window).scroll(function () {
+            let $window = $(this);
+            let scrollTop = $window.scrollTop();
+            let windowHeight = $window.height();
+            let documentHeight = $(document).height();
+            if (scrollTop + windowHeight  == documentHeight){
+                if(bool_sw){
+                    index += 20;
+                    console.log(index)
+                    setTimeout(fetchlist,200);
+                }
+            }
+        })
+
+        function fetchlist () {
+            $.ajax({
+                url : "/target",
+                data : {
+                    category: category
+                },
+                success : function (json) {
+                // 상품 20개씩 보여주기
+                    for (i=index-20; i<index; i++){
+                        if (i >= JSON.parse(json.data).length){
+                            index = i
+                            break;
+                        }
+                        allGoods.push(JSON.parse(json.data)[i].fields)
+                        {#console.log(allGoods)#}
+                        $('.infinite').append(
+                            `
+                            <div class="col" >
+                                <!-- Modal -->
+                                <div class="card" style="cursor:pointer;">
+                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal${ JSON.parse(json.data)[i].pk }">
+                                        <div class="modal fade" id="exampleModal${ JSON.parse(json.data)[i].pk }" tabindex="-1" aria-labelledby="exampleModalLabel${ JSON.parse(json.data)[i].pk }" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel${ JSON.parse(json.data)[i].pk }">${ allGoods[i].name }</h5>
+                                              </div>
+                                              <div class="modal-body" style="text-align: center">
+                                                <img id="modal-img" style="width: 90%; height: 90%; margin-bottom: 16px " src="${ allGoods[i].mood_pic }">
+                                                <br>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                                <div class="btn category btn-primary" style="background: rosybrown; border:white; width: 50px">${ allGoods[i].category }</div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" style="padding-top: 1px; width: 100%; background: gray; border: 0; ">
+                                                    <a id="detail-link" href="${ allGoods[i].detail_pic }" target="_blank" style="color: white; text-decoration-line: none;">
+                                                        사이트 바로가기
+                                                    </a>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                            <div id=card-top>
+                                          <img src="${ allGoods[i].mood_pic }"
+                                               class="card-img-top" alt="...">
+                                            </div>
+                                          <div class="card-body">
+                                            <h5 class="card-title">${ allGoods[i].name }</h5>
+                                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                              <div class="btn category btn-primary" style="background: rosybrown; border:white">${ allGoods[i].category }</div>
+                                          </div>
+                                    </div>
+                                    <button type="button" id="like-btn${ JSON.parse(json.data)[i].pk }" name="${ JSON.parse(json.data)[i].pk }" class="heart">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </button>
+                            </div>
+                            </div>
+                            `
+                        )
+                    }
+                    // 하트 클릭
+                    $(".heart").unbind("click");
+                    $('.heart').bind('click',function(){
+                          if($(this).hasClass('active')){
+                              $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                              $('.heart').removeClass('active');
+                              console.log(-1)
+                          } else {
+                              $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                              $('.heart').removeClass('active');
+                              $(this).addClass('active');
+                              console.log(1)
+                          }
+                    });
+                },
+                error : function () {
+                    alert('ajax 오류!')
+                }
+            })
+        }
+        })
+
+            if ( a == true) {
+                // 모든 상품 무한스크롤
+            let index = 0;
+            allGoods = []
+            var bool_sw = true;
+            $(window).scroll(function () {
+                let $window = $(this);
+                let scrollTop = $window.scrollTop();
+                let windowHeight = $window.height();
+                let documentHeight = $(document).height();
+                if (scrollTop + windowHeight  == documentHeight){
+                    if(bool_sw){
+                        index += 20;
+                        console.log(index)
+                        setTimeout(fetchlist,200);
+                    }
+                }
+            })
+
+            function fetchlist () {
+                $.ajax({
+                    url : "/target1",
+                    success : function (json) {
+
+                        // 상품 20개씩 보여주기
+                        for (i=index-20; i<index; i++){
+                            if (i >= JSON.parse(json.goods).length){
+                                index = i
+                                break;
+                            }
+                            allGoods.push(JSON.parse(json.goods)[i].fields)
+                            {#console.log(allGoods)#}
+                            $('.infinite').append(
+                                `
+                            <div class="col" >
+                                <!-- Modal -->
+                                <div class="card" style="cursor:pointer;">
+                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal${ JSON.parse(json.goods)[i].pk }">
+                                        <div class="modal fade" id="exampleModal${ JSON.parse(json.goods)[i].pk }" tabindex="-1" aria-labelledby="exampleModalLabel${ JSON.parse(json.goods)[i].pk }" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel${ JSON.parse(json.goods)[i].pk }">${ allGoods[i].name }</h5>
+                                              </div>
+                                              <div class="modal-body" style="text-align: center">
+                                                <img id="modal-img" style="width: 90%; height: 90%; margin-bottom: 16px " src="${ allGoods[i].mood_pic }">
+                                                <br>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                                <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                                <div class="btn category btn-primary" style="background: rosybrown; border:white; width: 50px">${ allGoods[i].category }</div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" style="padding-top: 1px; width: 100%; background: gray; border: 0; ">
+                                                    <a id="detail-link" href="${ allGoods[i].detail_pic }" target="_blank" style="color: white; text-decoration-line: none;">
+                                                        사이트 바로가기
+                                                    </a>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                            <div id=card-top>
+                                          <img src="${ allGoods[i].mood_pic }"
+                                               class="card-img-top" alt="...">
+                                            </div>
+                                          <div class="card-body">
+                                            <h5 class="card-title">${ allGoods[i].name }</h5>
+                                            <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood1 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood2 }</div>
+                                              <div class="btn mood btn-primary" style="background: lightsalmon; border:white">${ allGoods[i].mood3 }</div>
+                                              <div class="btn category btn-primary" style="background: rosybrown; border:white">${ allGoods[i].category }</div>
+                                          </div>
+                                    </div>
+                                    <button type="button" id="like-btn${ JSON.parse(json.goods)[i].pk }" name="${ JSON.parse(json.goods)[i].pk }" class="heart">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </button>
+                            </div>
+                            </div>
+                            `
+                            )
+                        }
+                        // 하트 클릭
+                        $(".heart").unbind("click");
+                        $('.heart').bind('click',function(){
+                            if($(this).hasClass('active')){
+                                $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                                $('.heart').removeClass('active');
+                                console.log(-1)
+                            } else {
+                                $('#'+ $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                                $('.heart').removeClass('active');
+                                $(this).addClass('active');
+                                console.log(1)
+                            }
+                        });
+                    },
+                    error : function () {
+                        alert('ajax 오류!')
+                    }
+                })
+            }
+            }
+
+        })
+    </script>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <style>
+        @media screen and (max-width: 500px) {
+            .pc-menu{
+                visibility: hidden;
+            }
+            .menu{
+                margin: auto;
+            }
+            #bx-id {
+                display: none;
+            }
+            .bx-wrapper {
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border: 0;
+            }
+            #carouselExampleCaptions{
+                display: block;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 4% 0 4%;
+            }
+            .nav-link {
+                font-size: small;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 161px;
+                border: white;
+                margin: auto;
+            }
+            .card-img-top{
+                width: 161px;
+                height: 161px;
+            }
+            .heart{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 46%;
+                right: 5%
+            }
+        }
+        @media screen and (min-width: 500px) {
+            .menu{
+                display: none;
+            }
+            #carouselExampleCaptions{
+                display: none;
+            }
+            #bx-id {
+                display: block;
+            }
+            .bx-wrapper {
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border: 0;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 15% 0 15%;
+            }
+            footer {
+                margin: 0 10% 0 10%;
+                padding-left: 2%;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 260px;
+                border: white;
+                margin-bottom: 20px;
+            }
+            #card-top{
+                overflow: hidden;
+            }
+            .card-img-top{
+                width: 100%;
+                height: 260px;
+                object-fit:cover;
+                transform:scale(1.0);
+                transition: transform .2s;
+            }
+            .card-img-top:hover{            /* 마우스 호버시 */
+                transform:scale(1.1);            /* 이미지 확대 */
+                transition: transform .2s; 	/*  시간 설정  */
+            }
+            .heart{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 35%;
+                right: 5%
+            }
+        }
+        .red{
+            fill: rgba( 255, 69, 0, 1 );
+        }
+        .white{
+            fill: rgba( 255, 255, 255, 0.7 );
+            stroke: white;
+        }
+        .red:hover{
+            fill: rgba( 255, 69, 0, 0.7 );
+        }
+        .white:hover{
+            fill: rgba( 255, 255, 255, 0.5 );
+        }
+        .dropdown-item{
+            width: 100%;
+        }
+        .recommend {
+            display: block;
+            box-sizing: border-box;
+            justify-content: space-evenly;
+            margin: auto;
+            width: 80%;
+            font-family: Cafe24SsurroundAir;
+        }
+        .carousel-item {
+            position: relative;
+            padding-bottom: 100%;
+        }
+        .reco_img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .img-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+        }
+        .img-wrapper img {
+            position: absolute;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body style="font-family: Cafe24SsurroundAir">
+<header>
+    <nav class="navbar navbar-light bg-light" style="padding-bottom: 8px">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'KakaoTalk_Photo_2022-01-18-15-42-07.jpeg' %}"
+                     alt="" width="50" height="50" class="img-fluid rounded">
+            </a>
+            <div id="auth" style="display: flex;">
+                {% if request.session.user %}
+                    <a class="mbti">당신의 mbti는 {{ usermbti.mbti }}입니다.</a>
+                    <a class="pc-menu" href="/signPage/logOut">로그아웃</a>
+                    <a class="pc-menu" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a>
+                {% else %}
+                    <a class="pc-menu" href="/signPage/signIn">로그인</a>
+                    <a class="pc-menu" href="/signPage/signUp">회원가입</a>
+                {% endif %}
+                <div class="btn-group dropstart">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPUAAADNCAMAAABXRsaXAAAAaVBMVEUAAAD////6+vrw8PAfHx8cHBz19fXn5+czMzNSUlLz8/MRERE2NjYiIiJsbGzGxsZ1dXW/v7/W1tZ/f3/Jyck1NTWurq5zc3NoaGgtLS21tbVfX1/j4+M9PT3BwcFaWlpOTk6Hh4eVlZXOBACRAAAD7UlEQVR4nO2d63aqMBBGC2i4KCJgsfTUS33/h+zpsoYkBPWHZNaab/YTfHvVJiGZTN4iRN6oA5Ag1gZFwoPiWeuk2/erNy6s+n2XPLSuc+qcM5DXd62rjDrgTPTHSWu1oQ43Ix/Kb50uqZPNyjL1WTfUsWanGVun1JkCkLrWakEdKQBL5VhzHsgGPmzrijpPII6WNdd52iUzrWvqNMGoDWuOy1A/+WCdUGcJSKKtO+ooAem09ZY6SkD22hplBP+l19Z8NhEes7pZK+okQSn+rJGG8Osgjve3VtD/19GaOkpA3rV1Sx0lIK22/qSOEpBPbY00nBXDN9c/6izBOBlfmjvqMMGozL2UA3WaQBysHST+m+FXGnuPFGPyap2d4RjhN76OHeuooI4UAH2QPZxzpexX41/R2DpSvH/kB6Nawzq1/6ZONiPfcTRhHTVcN8bzxvJ061KaPXXAGdg0jqWn8qq65Fm54EGZ5ZfjWHGyyi7mwJSc1BbiINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ4T1tQlUy/jWeukbvOSuhrwZZR5W6cPrXcn6pwzcKruWu+4Fkuvd9PWnDsNbCesU96tkPydvr4Qb0BAdvqK36kjBSBzbzZxvAIwZmNbo1xP3VnWXOdpl7VpfaROEwyz0xfkrXOkNjFDpy/MbhKc198uW22NsEK5kWlr9itwA9BOX7fuT0hDuHT6ok4SEMxOXxn4fI25NkMaxId1OOY3F+j3NeZeCui+GcjktXd2hmOElcpoPxzz7APgnGvl7fSV8qlQ8FF6zzQj3s0Lp86vI8a1Coc7tQq/3hwXp6edY+mrQfo+9dQ5X0Z/auvHrw3+QV0m9jL8elJbiINY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4TFlTV0y9iKet4+Pl3JdLHpT9+VKP3UcVlRvqasAZ+LhfUdmcqQPOxHn6ndyYc6V0O/EmcsH76sc68Vl/UceaHc8NCIS7mqN37TFvNnEeyAa2tnVDnScQjWXN9ZaLy8G0rqjTBKMyrDle7PFj3DpHaphSaGvMbhIY09aVVlsjrFBuSKcvIKTTFw4F9P91lFFHCUivrTGapVwZOn111FEC0mlrpEHc6PTF8ZEPP7nxpVlThwmG1ekLpeduZu0goXT6quw9Uo6HemOc1xAixbsJ0pWFcqxRO33x3xIfTnNxOn0tJjp9Kc5D2kZFfuv/ExjXeTuzX2Nz61JqjovTvHYsPZ2+um3GZ5thlW27pzt9qYQHyq8ntYU4YFr/ACZxfL6iNSmvAAAAAElFTkSuQmCC"
+                         class="menu btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
+                         style="width: 20px; height: 17px; padding: 0; margin-right: 10px; border: 0">
+                    {% if request.session.user %}
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a class="dropdown-item" href="/signPage/logOut">로그아웃</a></li>
+                            <li><a class="dropdown-item" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a class="dropdown-item" href="/signPage/signIn">로그인</a></li>
+                            <li><a class="dropdown-item" href="/signPage/signUp">회원가입</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <ul class="nav nav-tabs" style="justify-content: space-between; font-family: 'Cafe24SsurroundAir'; font-weight: bold; background: #F8F9FA">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+               style="color: #333; margin-top: 2px;" role="button" aria-expanded="false">MBTI</a>
+            <ul class="dropdown-menu" style="height: 270px; overflow: auto">
+                {% for one in mbti %}
+                    <a id="mbti_16" >
+                        {#                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163572945028172903.png?gif=1&w=180&h=180&c=c">#}
+                        <li ><a class="dropdown-item" href='/mbti/{{ one }}' style="text-align: center; " >{{ one }}</a></li>
+                    </a>
+                {% endfor %}
+
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+               style="color: #333; margin-top: 2px" role="button" aria-expanded="false">무드</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item mood" href="/mood/1">미니멀</a></li>
+                <li><a class="dropdown-item mood" href="/mood/2">모던</a></li>
+                <li><a class="dropdown-item mood" href="/mood/3">개성</a></li>
+                <li><a class="dropdown-item mood" href="/mood/4">내추럴</a></li>
+                <li><a class="dropdown-item mood" href="/mood/5">빈티지</a></li>
+                <li><a class="dropdown-item mood" href="/mood/6">로맨틱</a></li>
+                <li><a class="dropdown-item mood" href="/mood/7">실용적</a></li>
+                <li><a class="dropdown-item mood" href="/mood/8">캐주얼</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/community" style="color: #333; margin-top: 2px">커뮤니티</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
+               style="color: #333; margin-top: 2px" target='_blank'>퀴즈</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color: #333; margin-top: 2px" href="/visual">설명</a>
+        </li>
+    </ul>
+    {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" style="z-index: 0;">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="4000">
+                <a href="#">
+                    <img src="https://www.ikea.com/kr/ko/images/products/lilltjaern-mirror__1031301_pe836473_s5.jpg?f=xl"
+                         class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+                <a href="#">
+                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/sub_images/156945928033471904.jpg?gif=1&w=1280&h=1280&c=c"
+                         class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+                <a href="#">
+                    <img src="https://www.ikea.com/kr/ko/images/products/mydal-bunk-bed-frame-pine__1044974_pe842350_s5.jpg?f=xl"
+                         class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+                <a href="#">
+                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162916088198930662.jpg?gif=1&w=1280&h=1280&c=c"
+                         class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+                <a href="#">
+                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162193245838993039.jpg?gif=1&w=1280&h=1280&c=c"
+                         class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+                <a href="#">
+                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/163263804036180290.jpg?gif=1&w=1280&h=1280&c=c"
+                         class="d-block w-100" alt="...">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="edd" style="visibility:hidden;opacity:0">
+        <div style="display: flex; justify-content: center; ">
+            <div id="bx-id">
+                <ul class="bxslider" >
+                    <li>
+                        <a href="#">
+                            <img src="https://www.ikea.com/kr/ko/images/products/lilltjaern-mirror__1031301_pe836473_s5.jpg?f=xl" alt="" title="이미지1">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/sub_images/156945928033471904.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지2">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://www.ikea.com/kr/ko/images/products/mydal-bunk-bed-frame-pine__1044974_pe842350_s5.jpg?f=xl" alt="" title="이미지3">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162916088198930662.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162193245838993039.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/163263804036180290.jpg?gif=1&w=1280&h=1280&c=c" alt="" title="이미지3">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+   {% if request.session.user %} <!-- 로그인 상태 -->
+    {% if usermbti.mbti == '모름' %} <!-- 로그인했는데 mbti 모를경우 -->
+        <article class="d-flex justify-content-center" style="margin: 7rem 0 7rem 0">
+            <p style="font-size: larger">
+                회원님의 MBTI를 알아보세요!! 회원님이 좋아할만한 인테리어를 추천해드릴게요!!
+                <a href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC" style="text-decoration: none">
+                    퀴즈
+                </a>
+                클릭 ㄱㄱ
+            </p>
+            <br><br><br><br><br><br><br>
+        </article>
+    {% else %} <!-- 정상 로그인 -->
+        <article>
+            <section class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-2" style="font-size: large; font-weight: bold">
+                        당신의 MBTI's 무드 PICK: {{ mood_name }}
+                    </div>
+                </div>
+                <div id="edd2" style="visibility:hidden; opacity:0">
+                    <div style="display: flex; justify-content: center; ">
+                        <div id="bx-id2">
+                            <ul id="bxslider2">
+                                {% if mood %}
+                                    {% for data in mood %}
+                                        <li>
+                                            <div class="img-wrapper">
+                                                <a href="#">
+                                                    <img src="{{ data.mood_pic }}">
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-2" style="font-size: large; font-weight: bold">
+                        당신의 MBTI's 소품 PICK:
+                    </div>
+                </div>
+                <div id="edd3" style="visibility:hidden; opacity:0">
+                    <div style="display: flex; justify-content: center; ">
+                        <div id="bx-id3">
+                            <ul id="bxslider3">
+                                {% if obj %}
+                                    {% for data in obj %}
+                                        <li>
+                                            <div class="img-wrapper">
+                                                <a href="#">
+                                                    <img src="{{ data.mood_pic }}">
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    {% endif %}
+
+{% else %} <!-- 로그인 안된 상태 -->
+    <article class="d-flex justify-content-center" style="margin: 7rem 0 7rem 0">
+        <p style="font-size: larger">
+            당신의 MBTI가 좋아할만한 인테리어가 궁금하지 않으신가요~?? 회원가입 후 인테리어를 추천받아보세요!!
+        </p>
+        <br><br><br><br><br><br><br>
+    </article>
+{% endif %}
+</article>
+
+<footer>
+
+    <div class="dropdown footer_dropdown">
+        <a class="btn btn-secondary dropdown-toggle category-default" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            모든상품
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Cafe24SsurroundAir'; font-weight: bold">
+            <li><a class="dropdown-item product" value="테이블">테이블</a></li>
+        <li><a class="dropdown-item product" value="침대">침대</a></li>
+          <li><a class="dropdown-item product" value="침구류">침구류</a></li>
+          <li><a class="dropdown-item product" value="조명">조명</a></li>
+          <li><a class="dropdown-item product" value="의자">의자</a></li>
+          <li><a class="dropdown-item product" value="거울">거울</a></li>
+          <li><a class="dropdown-item product" value="수납장">수납장</a></li>
+          <li><a class="dropdown-item product" value="러그">러그</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row infinite">
+
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

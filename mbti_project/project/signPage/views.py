@@ -43,15 +43,12 @@ def signIn2(request):
     else:
         try:
             myUser = User.objects.get(userId=login_userId)
-            usermbti = myUser.mbti
-            context = {
-                'usermbti' : usermbti
-            }
             if login_userPw == myUser.userPw and login_userId == myUser.userId:
                 request.session['user'] = myUser.id
+                request.session['nickname'] = myUser.nickname
                 print('userSession---> ', request.session['user'])
                 messages.success(request, "로그인성공!!")
-                return render(request, 'mainPage/main.html', context)
+                return redirect('/')
             else:
                 messages.error(request, "비밀번호가 틀렸습니다!!")
                 return render(request, 'signPage/signIn.html')
@@ -90,10 +87,5 @@ def userUpdate2(request):
         return render(request, 'signPage/userUpdate.html')
     else:
         update.save()
-        myUser = User.objects.get(id = request.session['user'])
-        usermbti = myUser.mbti
-        context = {
-            'usermbti': usermbti
-        }
         messages.success(request, "수정완료 되었습니다!!")
-        return render(request, 'mainPage/main.html', context)
+        return redirect('/')

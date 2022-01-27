@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script type="text/css" src="{% static 'main.css' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    $(document).ready(function(){
+          {#자동슬라이드#}
+      $('.bxslider').bxSlider({ // 클래스명 주의!
+          auto: true, // 자동으로 애니메이션 시작
+          speed: 500,  // 애니메이션 속도
+          pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+          pager: true, // 페이지 표시 보여짐
+          controls: false,
+          minSlides: 3,
+          maxSlides: 3,
+          slideWidth: 400,
+          slideMargin: 10,
+          onSliderLoad: function(){ $("#edd").css("visibility", "visible").animate({opacity:1}); }
+        });
+
+      $('#vs1').click(function(){
+          url1 = "https://public.tableau.com/views/userGender/1_1?:embed=yes&:showVizHome=nolanguage=ko-KR&:display_count=n&:origin=viz_share_link";
+          url2 = "https://public.tableau.com/views/agembti/2_1?:embed=yes&:showVizHome=nolanguage=ko-KR&:display_count=n&:origin=viz_share_link";
+          $("#graph1").attr('src',url1);
+          $("#graph2").attr('src',url2);
+      })
+
+      $('#vs2').click(function(){
+          url1 = "https://public.tableau.com/views/jobLike/2_1?:embed=yes&:showVizHome=no&language=ko-KR&:display_count=n&:origin=viz_share_link";
+          url2 = "https://public.tableau.com/views/mbtimood/3_1?:embed=yes&:showVizHome=no&language=ko-KR&:display_count=n&:origin=viz_share_link";
+          $("#graph1").attr('src',url1);
+          $("#graph2").attr('src',url2);
+      })
+
+        $('#vs3').click(function(){
+          url1 = "https://public.tableau.com/views/likemood/4_1?:embed=yes&:showVizHome=nolanguage=ko-KR&:retry=yes&:display_count=n&:origin=viz_share_link";
+          url2 = "https://public.tableau.com/views/mbtimood/3_1?:embed=yes&:showVizHome=no&language=ko-KR&:display_count=n&:origin=viz_share_link";
+          $("#graph1").attr('src',url1);
+          $("#graph2").attr('src',url2);
+      })
+
+
+    })
+    </script>
+     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <style>
+        .dropdown-item{
+            width: 100%;
+        }
+        @media screen and (max-width: 500px) {
+            #bx-id {
+                display: none;
+            }
+            .bx-wrapper {
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              border: 0;
+            }
+            #carouselExampleCaptions{
+                display: block;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 4% 0 4%;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 161px;
+                border: white;
+                margin: auto;
+            }
+            .card-img-top{
+                width: 161px;
+                height: 161px;
+            }
+            #like-btn{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 46%;
+                right: 5%
+            }
+        }
+        @media screen and (min-width: 500px) {
+            #carouselExampleCaptions{
+                display: none;
+            }
+            #bx-id {
+                display: block;
+            }
+            .bx-wrapper {
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              border: 0;
+            }
+            .nav {
+                height: 50px;
+                padding: 0 15% 0 15%;
+            }
+            footer {
+                margin: 0 10% 0 10%;
+                padding-left: 2%;
+            }
+            .row > .col{
+                padding: 12px 0 0 0;
+            }
+            .card {
+                width: 260px;
+                border: white;
+                margin-bottom: 20px;
+                overflow: hidden;
+            }
+            .card-img-top{
+                width: 100%;
+                height: 260px;
+                object-fit:cover;
+                transform:scale(1.0);
+                transition: transform .2s;
+            }
+            .card-img-top:hover{            /* 마우스 호버시 */
+                transform:scale(1.1);            /* 이미지 확대 */
+                transition: transform .2s; 	/*  시간 설정  */
+            }
+            #like-btn{
+                background-color: rgba( 255, 255, 255, 0 );
+                border: 0;
+                width: 35px;
+                height: 30px;
+                position: absolute;
+                bottom: 35%;
+                right: 5%
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+     <nav class="navbar navbar-light bg-light" style="padding-bottom: 8px">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'KakaoTalk_Photo_2022-01-18-15-42-07.jpeg' %}"
+               alt="" width="50" height="50" class="img-fluid rounded">
+        </a>
+          <div id="auth" style="display: flex;">
+              {% if request.session.user %}
+                  <div class="pc-menu">
+                    <span>당신의 mbti는 {{ usermbti }}입니다.</span>
+                    <a class="dropdown-item" href="/signPage/logOut">로그아웃</a>
+                    <a class="dropdown-item" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a>
+                </div>
+                  {% else %}
+                <div class="pc-menu" style="display: flex;">
+                  <a class="dropdown-item" href="/signPage/signIn">로그인</a>
+                  <a class="dropdown-item" href="/signPage/signUp">회원가입</a>
+                </div>
+              {% endif %}
+                <div class="btn-group dropstart">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPUAAADNCAMAAABXRsaXAAAAaVBMVEUAAAD////6+vrw8PAfHx8cHBz19fXn5+czMzNSUlLz8/MRERE2NjYiIiJsbGzGxsZ1dXW/v7/W1tZ/f3/Jyck1NTWurq5zc3NoaGgtLS21tbVfX1/j4+M9PT3BwcFaWlpOTk6Hh4eVlZXOBACRAAAD7UlEQVR4nO2d63aqMBBGC2i4KCJgsfTUS33/h+zpsoYkBPWHZNaab/YTfHvVJiGZTN4iRN6oA5Ag1gZFwoPiWeuk2/erNy6s+n2XPLSuc+qcM5DXd62rjDrgTPTHSWu1oQ43Ix/Kb50uqZPNyjL1WTfUsWanGVun1JkCkLrWakEdKQBL5VhzHsgGPmzrijpPII6WNdd52iUzrWvqNMGoDWuOy1A/+WCdUGcJSKKtO+ooAem09ZY6SkD22hplBP+l19Z8NhEes7pZK+okQSn+rJGG8Osgjve3VtD/19GaOkpA3rV1Sx0lIK22/qSOEpBPbY00nBXDN9c/6izBOBlfmjvqMMGozL2UA3WaQBysHST+m+FXGnuPFGPyap2d4RjhN76OHeuooI4UAH2QPZxzpexX41/R2DpSvH/kB6Nawzq1/6ZONiPfcTRhHTVcN8bzxvJ061KaPXXAGdg0jqWn8qq65Fm54EGZ5ZfjWHGyyi7mwJSc1BbiINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ4T1tQlUy/jWeukbvOSuhrwZZR5W6cPrXcn6pwzcKruWu+4Fkuvd9PWnDsNbCesU96tkPydvr4Qb0BAdvqK36kjBSBzbzZxvAIwZmNbo1xP3VnWXOdpl7VpfaROEwyz0xfkrXOkNjFDpy/MbhKc198uW22NsEK5kWlr9itwA9BOX7fuT0hDuHT6ok4SEMxOXxn4fI25NkMaxId1OOY3F+j3NeZeCui+GcjktXd2hmOElcpoPxzz7APgnGvl7fSV8qlQ8FF6zzQj3s0Lp86vI8a1Coc7tQq/3hwXp6edY+mrQfo+9dQ5X0Z/auvHrw3+QV0m9jL8elJbiINY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4TFlTV0y9iKet4+Pl3JdLHpT9+VKP3UcVlRvqasAZ+LhfUdmcqQPOxHn6ndyYc6V0O/EmcsH76sc68Vl/UceaHc8NCIS7mqN37TFvNnEeyAa2tnVDnScQjWXN9ZaLy8G0rqjTBKMyrDle7PFj3DpHaphSaGvMbhIY09aVVlsjrFBuSKcvIKTTFw4F9P91lFFHCUivrTGapVwZOn111FEC0mlrpEHc6PTF8ZEPP7nxpVlThwmG1ekLpeduZu0goXT6quw9Uo6HemOc1xAixbsJ0pWFcqxRO33x3xIfTnNxOn0tJjp9Kc5D2kZFfuv/ExjXeTuzX2Nz61JqjovTvHYsPZ2+um3GZ5thlW27pzt9qYQHyq8ntYU4YFr/ACZxfL6iNSmvAAAAAElFTkSuQmCC"
+                         class="menu btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
+                         style="width: 20px; height: 17px; padding: 0; margin-right: 10px; border: 0">
+                    {% if request.session.user %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a class="dropdown-item" href="/signPage/logOut">로그아웃</a></li>
+                    <li><a class="dropdown-item" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a></li>
+                  </ul>
+                    {% else %}
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a class="dropdown-item" href="/signPage/signIn">로그인</a></li>
+                    <li><a class="dropdown-item" href="/signPage/signUp">회원가입</a></li>
+                  </ul>
+                    {% endif %}
+                </div>
+            </div>
+      </div>
+    </nav>
+    <ul class="nav nav-tabs" style="justify-content: space-between; font-family: 'Cafe24SsurroundAir'; font-weight: bold; background: #F8F9FA">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+           style="color: #333; margin-top: 2px;" role="button" aria-expanded="false">MBTI</a>
+        <ul class="dropdown-menu" style="height: 270px; overflow: auto">
+            {% for one in mbti %}
+                <a id="mbti_16" >
+{#                    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163572945028172903.png?gif=1&w=180&h=180&c=c">#}
+                    <li ><a class="dropdown-item" href='mbti/{{ one }}' style="text-align: center; " >{{ one }}</a></li>
+                </a>
+            {% endfor %}
+
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+           style="color: #333; margin-top: 2px" role="button" aria-expanded="false">무드</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item mood" href="mood/1">미니멀</a></li>
+          <li><a class="dropdown-item mood" href="mood/2">모던</a></li>
+          <li><a class="dropdown-item mood" href="mood/3">개성</a></li>
+          <li><a class="dropdown-item mood" href="mood/4">내추럴</a></li>
+          <li><a class="dropdown-item mood" href="mood/5">빈티지</a></li>
+          <li><a class="dropdown-item mood" href="mood/6">로맨틱</a></li>
+          <li><a class="dropdown-item mood" href="mood/7">실용적</a></li>
+          <li><a class="dropdown-item mood" href="mood/8">캐주얼</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #333; margin-top: 2px">커뮤니티</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
+           style="color: #333; margin-top: 2px" target='_blank'>퀴즈</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+           style="color: #333" role="button" aria-expanded="false">설명</a>
+        <ul class="dropdown-menu">
+          <li><a id="vs1" class="dropdown-item" >회원 개요</a></li>
+          <li><a id='vs2' class="dropdown-item" >MBTI x 인테리어 1</a></li>
+          <li><a id='vs3' class="dropdown-item" >MBTI x 인테리어 2</a></li>
+        </ul>
+      </li>
+    </ul>
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+{#    <nav class="navbar navbar-light bg-light">#}
+{#      <div class="container-fluid">#}
+{#        <a class="navbar-brand" href="/">#}
+{#          <img src="https://image.rocketpunch.com/company/2425/bucketplace_logo_1520495612.png?s=400x400&t=inside"#}
+{#               alt="" width="50" height="50" class="img-fluid rounded">#}
+{#            <div id="auth" class="visual">#}
+{#                <a href="/visual">설명</a>#}
+{#            </div>#}
+{#            <div id="auth">#}
+{#                <a href="##">로그인</a>#}
+{#                <a href="###">회원가입</a>#}
+{#            </div>#}
+{#        </a>#}
+{#      </div>#}
+{#    </nav>#}
+
+
+
+
+{#    <ul class="nav nav-tabs" style="justify-content: center; font-family: 'Cafe24SsurroundAir'; font-weight: bold">#}
+{##}
+{#      <li class="nav-item dropdown">#}
+{#        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"#}
+{#           style="color: #333" role="button" aria-expanded="false">설명</a>#}
+{#        <ul class="dropdown-menu">#}
+{#          <li><a id="vs1" class="dropdown-item" >회원 개요</a></li>#}
+{#          <li><a id='vs2' class="dropdown-item" >MBTI x 인테리어 정보</a></li>#}
+{#          <li><a id='vs3' class="dropdown-item" >ML 정보</a></li>#}
+{#        </ul>#}
+{#      </li>#}
+{#    </ul>#}
+
+
+</header>
+
+<article2>
+    <p class="vslz">
+        <iframe id="graph1"
+            src="https://public.tableau.com/views/userGender/1_1?:embed=yes&:showVizHome=nolanguage=ko-KR&:display_count=n&:origin=viz_share_link"
+            width="800" height="700"
+            align=center></iframe>
+
+        <iframe id="graph2"
+            src="https://public.tableau.com/views/agembti/2_1?:embed=yes&:showVizHome=nolanguage=ko-KR&:display_count=n&:origin=viz_share_link"
+            width="800" height="700"
+            align=center></iframe>
+    </p>
+</article2>
+
+</body>
+</html>
