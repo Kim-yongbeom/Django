@@ -294,8 +294,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # 파일의 끝에 AWS 관련 내용을 추가
-AWS_ACCESS_KEY_ID = 'AKIASTA2AOD2IDRYC2HQ' #인증받은 키 아이디 -> I AM에서 인증받은 사용자 키!!
-AWS_SECRET_ACCESS_KEY = 'ntPBu1eJkZ9pp6FbrRAruVRoJOdrSoU1+7b9d55W' # 비번
+AWS_ACCESS_KEY_ID = '아이디' #인증받은 키 아이디 -> I AM에서 인증받은 사용자 키!!
+AWS_SECRET_ACCESS_KEY = '비번비번' # 비번
 AWS_S3_REGION_NAME = 'us-east-2' #지역
 AWS_STORAGE_BUCKET_NAME = 'high03' # s3 이름
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
