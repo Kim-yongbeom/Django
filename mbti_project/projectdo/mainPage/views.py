@@ -115,7 +115,9 @@ def main(request):
 
 def target(request):
     category = request.GET.get('category')
-    if category == '테이블':
+    if category == '모든상품':
+        data = Product.objects.all()
+    elif category == '테이블':
         data = Product.objects.filter(category=category)
     elif category == '침대':
         data = Product.objects.filter(category=category)
