@@ -113,6 +113,29 @@ def main(request):
 
     return render(request, 'mainPage/main.html',context)
 
+def heart(request,pid):
+    heart = pid
+    like = request.POST.get('like')
+    userid = request.session.get('user')
+    user = User.objects.get(id=userid)
+    if(like == '1'):
+        user.heart += heart + ','
+        user.save()
+        liked_pd = user.heart[:-1]
+        liked_pd = liked_pd.strip()
+        liked_pd = liked_pd.split(',')
+        liked_pd = set(liked_pd)
+        liked_pd = list(liked_pd)
+
+    else:
+        pass
+
+    context = {
+        'data': liked_pd,
+        'heart' : heart
+    }
+    return JsonResponse(context)
+
 def target(request):
     category = request.GET.get('category')
     if category == '모든상품':
