@@ -120,25 +120,29 @@ def heart(request,pid):
     user = User.objects.get(id=userid)
     if(like == '1'):
         user.heart += heart + ','
-        user.save()
         liked_pd = user.heart[:-1]
         liked_pd = liked_pd.strip()
         liked_pd = liked_pd.split(',')
         liked_pd = set(liked_pd)
         liked_pd = list(liked_pd)
+        user.heart = ''
+        for i in liked_pd:
+            user.heart += i + ','
 
     else:
-        liked_pd = user.heart[:-1]
-        liked_pd = liked_pd.strip()
-        liked_pd = liked_pd.split(',')
+        liked_pd = user.heart.split(',')
         for i in liked_pd:
             if heart == i:
                 liked_pd.remove(heart)
-                print(liked_pd)
-                user.save()
+        user.heart = ''
+        for j in liked_pd:
+            user.heart += j + ','
+
+
+    user.save()
 
     context = {
-        'data': liked_pd,
+        'data': user.heart,
         'heart' : heart
     }
     return JsonResponse(context)
