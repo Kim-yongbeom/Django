@@ -130,7 +130,9 @@ def heart(request,pid):
             user.heart += i + ','
 
     else:
-        liked_pd = user.heart.split(',')
+        liked_pd = user.heart[:-1]
+        liked_pd = liked_pd.strip()
+        liked_pd = liked_pd.split(',')
         for i in liked_pd:
             if heart == i:
                 liked_pd.remove(heart)
