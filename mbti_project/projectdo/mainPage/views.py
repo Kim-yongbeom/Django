@@ -128,7 +128,14 @@ def heart(request,pid):
         liked_pd = list(liked_pd)
 
     else:
-        pass
+        liked_pd = user.heart[:-1]
+        liked_pd = liked_pd.strip()
+        liked_pd = liked_pd.split(',')
+        for i in liked_pd:
+            if heart == i:
+                liked_pd.remove(heart)
+                print(liked_pd)
+                user.save()
 
     context = {
         'data': liked_pd,
