@@ -140,16 +140,16 @@
                         $(".heart").unbind("click");
                         $('.heart').bind('click', function () {
                             {% if request.session.user %}
-                                  $.ajaxSetup({
-                                    headers: { "X-CSRFToken": '{{csrf_token}}' }
-                                  });
+                                $.ajaxSetup({
+                                    headers: {"X-CSRFToken": '{{csrf_token}}'}
+                                });
                                 if ($(this).hasClass('active')) {
                                     $('#' + $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
                                     $('.heart').removeClass('active');
                                     heart = $(this).attr('name')
                                     like = -1
                                     $.ajax({
-                                        url: '/heart/'+heart,
+                                        url: '/heart/' + heart,
                                         type: 'POST',
                                         data: {
                                             like: like
@@ -162,7 +162,7 @@
                                             alert('ajax 오류!')
                                         }
                                     })
-                                    
+
                                 } else {
                                     $('#' + $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
                                     $('.heart').removeClass('active');
@@ -170,7 +170,7 @@
                                     heart = $(this).attr('name')
                                     like = 1
                                     $.ajax({
-                                        url: '/heart/'+heart,
+                                        url: '/heart/' + heart,
                                         type: 'POST',
                                         data: {
                                             like: like
@@ -281,15 +281,49 @@
                             $(".heart").unbind("click");
                             $('.heart').bind('click', function () {
                                 {% if request.session.user %}
+                                    $.ajaxSetup({
+                                        headers: {"X-CSRFToken": '{{csrf_token}}'}
+                                    });
                                     if ($(this).hasClass('active')) {
                                         $('#' + $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
                                         $('.heart').removeClass('active');
-                                        console.log(-1)
+                                        heart = $(this).attr('name')
+                                        like = -1
+                                        $.ajax({
+                                            url: '/heart/' + heart,
+                                            type: 'POST',
+                                            data: {
+                                                like: like
+                                            },
+                                            success: function (json) {
+                                                console.log(-1)
+                                                console.log(heart)
+                                            },
+                                            error: function () {
+                                                alert('ajax 오류!')
+                                            }
+                                        })
+
                                     } else {
                                         $('#' + $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
                                         $('.heart').removeClass('active');
                                         $(this).addClass('active');
-                                        console.log(1)
+                                        heart = $(this).attr('name')
+                                        like = 1
+                                        $.ajax({
+                                            url: '/heart/' + heart,
+                                            type: 'POST',
+                                            data: {
+                                                like: like
+                                            },
+                                            success: function (data) {
+                                                console.log(1)
+                                                console.log(heart)
+                                            },
+                                            error: function () {
+                                                alert('ajax 오류!')
+                                            }
+                                        })
                                     }
                                 {% else %}
                                     alert('로그인을 해주세요')
@@ -315,10 +349,9 @@
                     let documentHeight = $(document).height();
                     if (scrollTop + windowHeight == documentHeight) {
                         // 클릭하면 a가 false가 되므로 아무런 진행이 되지 않게 만들어준것
-                        if (a === false){
+                        if (a === false) {
                             return
-                        }
-                        else if (bool_sw) {
+                        } else if (bool_sw) {
                             index += 20;
                             console.log(index)
                             setTimeout(fetchlist, 200);
@@ -393,15 +426,49 @@
                             $(".heart").unbind("click");
                             $('.heart').bind('click', function () {
                                 {% if request.session.user %}
+                                    $.ajaxSetup({
+                                        headers: {"X-CSRFToken": '{{csrf_token}}'}
+                                    });
                                     if ($(this).hasClass('active')) {
                                         $('#' + $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
                                         $('.heart').removeClass('active');
-                                        console.log(-1)
+                                        heart = $(this).attr('name')
+                                        like = -1
+                                        $.ajax({
+                                            url: '/heart/' + heart,
+                                            type: 'POST',
+                                            data: {
+                                                like: like
+                                            },
+                                            success: function (json) {
+                                                console.log(-1)
+                                                console.log(heart)
+                                            },
+                                            error: function () {
+                                                alert('ajax 오류!')
+                                            }
+                                        })
+
                                     } else {
                                         $('#' + $(this).attr("id")).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
                                         $('.heart').removeClass('active');
                                         $(this).addClass('active');
-                                        console.log(1)
+                                        heart = $(this).attr('name')
+                                        like = 1
+                                        $.ajax({
+                                            url: '/heart/' + heart,
+                                            type: 'POST',
+                                            data: {
+                                                like: like
+                                            },
+                                            success: function (data) {
+                                                console.log(1)
+                                                console.log(heart)
+                                            },
+                                            error: function () {
+                                                alert('ajax 오류!')
+                                            }
+                                        })
                                     }
                                 {% else %}
                                     alert('로그인을 해주세요')
