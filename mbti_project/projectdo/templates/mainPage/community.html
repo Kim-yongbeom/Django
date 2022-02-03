@@ -149,7 +149,7 @@
             </a>
             <div id="auth" style="display: flex;">
                 {% if request.session.user %}
-                    <a class="mbti">당신의 mbti는 {{ usermbti.mbti }}입니다.</a>
+                    <a class="pc-menu">당신의 mbti는 {{ usermbti.mbti }}입니다.</a>
                     <a class="pc-menu" href="/insert">게시물작성</a>
                     <a class="pc-menu" href="/signPage/logOut">로그아웃</a>
                     <a class="pc-menu" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a>

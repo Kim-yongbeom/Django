@@ -523,188 +523,6 @@
         })
     </script>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
-    <style>
-        @media screen and (max-width: 500px) {
-            .pc-menu {
-                visibility: hidden;
-            }
-
-            .menu {
-                margin: auto;
-            }
-
-            #bx-id {
-                display: none;
-            }
-
-            .bx-wrapper {
-                -moz-box-shadow: none;
-                -webkit-box-shadow: none;
-                box-shadow: none;
-                border: 0;
-            }
-
-            #carouselExampleCaptions {
-                display: block;
-            }
-
-            .nav {
-                height: 50px;
-                padding: 0 4% 0 4%;
-            }
-
-            .nav-link {
-                font-size: small;
-            }
-
-            .row > .col {
-                padding: 12px 0 0 0;
-            }
-
-            .card {
-                width: 161px;
-                border: white;
-                margin: auto;
-            }
-
-            .card-img-top {
-                width: 161px;
-                height: 161px;
-            }
-
-            .heart {
-                background-color: rgba(255, 255, 255, 0);
-                border: 0;
-                width: 35px;
-                height: 30px;
-                position: absolute;
-                bottom: 46%;
-                right: 5%
-            }
-        }
-
-        @media screen and (min-width: 500px) {
-            .menu {
-                display: none;
-            }
-
-            #carouselExampleCaptions {
-                display: none;
-            }
-
-            #bx-id {
-                display: block;
-            }
-
-            .bx-wrapper {
-                -moz-box-shadow: none;
-                -webkit-box-shadow: none;
-                box-shadow: none;
-                border: 0;
-            }
-
-            .nav {
-                height: 50px;
-                padding: 0 15% 0 15%;
-            }
-
-            footer {
-                margin: 0 10% 0 10%;
-                padding-left: 2%;
-            }
-
-            .row > .col {
-                padding: 12px 0 0 0;
-            }
-
-            .card {
-                width: 260px;
-                border: white;
-                margin-bottom: 20px;
-            }
-
-            #card-top {
-                overflow: hidden;
-            }
-
-            .card-img-top {
-                width: 100%;
-                height: 260px;
-                object-fit: cover;
-                transform: scale(1.0);
-                transition: transform .2s;
-            }
-
-            .card-img-top:hover { /* 마우스 호버시 */
-                transform: scale(1.1); /* 이미지 확대 */
-                transition: transform .2s; /*  시간 설정  */
-            }
-
-            .heart {
-                background-color: rgba(255, 255, 255, 0);
-                border: 0;
-                width: 35px;
-                height: 30px;
-                position: absolute;
-                bottom: 35%;
-                right: 5%
-            }
-        }
-
-        .red {
-            fill: rgba(255, 69, 0, 1);
-        }
-
-        .white {
-            fill: rgba(255, 255, 255, 0.7);
-            stroke: white;
-        }
-
-        .red:hover {
-            fill: rgba(255, 69, 0, 0.7);
-        }
-
-        .white:hover {
-            fill: rgba(255, 255, 255, 0.5);
-        }
-
-        .dropdown-item {
-            width: 100%;
-        }
-
-        .recommend {
-            display: block;
-            box-sizing: border-box;
-            justify-content: space-evenly;
-            margin: auto;
-            width: 80%;
-            font-family: Cafe24SsurroundAir;
-        }
-
-        .carousel-item {
-            position: relative;
-            padding-bottom: 0;
-        }
-
-        .reco_img {
-            position: absolute;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .img-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 100%;
-        }
-
-        .img-wrapper img {
-            position: absolute;
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
 </head>
 <body style="font-family: Cafe24SsurroundAir">
 <header>
@@ -716,7 +534,7 @@
             </a>
             <div id="auth" style="display: flex;">
                 {% if request.session.user %}
-                    <a class="mbti">당신의 mbti는 {{ usermbti.mbti }}입니다.</a>
+                    <a class="pc-menu">당신의 mbti는 {{ usermbti.mbti }}입니다.</a>
                     <a class="pc-menu" href="/signPage/logOut">로그아웃</a>
                     <a class="pc-menu" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a>
                 {% else %}
@@ -783,7 +601,7 @@
                href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC"
                style="color: #333; margin-top: 2px" target='_blank'>퀴즈</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item dropdown">
             <a class="nav-link" style="color: #333; margin-top: 2px" href="/visual">설명</a>
         </li>
     </ul>
