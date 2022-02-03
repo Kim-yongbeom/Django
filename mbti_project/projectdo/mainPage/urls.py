@@ -38,4 +38,5 @@ urlpatterns = [
     path('insert2', mainPage.views.insert2, name='insert2'),
     path('delete/<bid>', mainPage.views.delete, name='delete'),
     path('edit/<bid>', mainPage.views.edit, name='edit'),
+    path('edit2/<bid>', mainPage.views.edit2, name='edit2'),
 ]

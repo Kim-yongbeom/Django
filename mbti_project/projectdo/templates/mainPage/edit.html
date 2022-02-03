@@ -37,121 +37,6 @@
         })
     </script>
 
-    <style>
-        @media screen and (max-width: 500px) {
-            .pc-menu{
-                visibility: hidden;
-            }
-            .menu{
-                margin: auto;
-            }
-            #bx-id {
-                display: none;
-            }
-            .bx-wrapper {
-                -moz-box-shadow: none;
-                -webkit-box-shadow: none;
-                box-shadow: none;
-                border: 0;
-            }
-            #carouselExampleCaptions{
-                display: block;
-            }
-            .nav {
-                height: 50px;
-                padding: 0 4% 0 4%;
-            }
-            .nav-link {
-                font-size: small;
-            }
-            .row > .col{
-                padding: 12px 0 0 0;
-            }
-            .card {
-                width: 161px;
-                border: white;
-                margin: auto;
-            }
-            .card-img-top{
-                width: 161px;
-                height: 161px;
-            }
-            .heart{
-                background-color: rgba( 255, 255, 255, 0 );
-                border: 0;
-                width: 35px;
-                height: 30px;
-                position: absolute;
-                bottom: 46%;
-                right: 5%
-            }
-        }
-        @media screen and (min-width: 500px) {
-            .menu{
-                display: none;
-            }
-            #carouselExampleCaptions{
-                display: none;
-            }
-            #bx-id {
-                display: block;
-            }
-            .bx-wrapper {
-                -moz-box-shadow: none;
-                -webkit-box-shadow: none;
-                box-shadow: none;
-                border: 0;
-            }
-            .nav {
-                height: 50px;
-                padding: 0 15% 0 15%;
-            }
-            footer {
-                margin: 0 10% 0 10%;
-                padding-left: 2%;
-            }
-            .row > .col{
-                padding: 12px 0 0 0;
-            }
-            .card {
-                width: 260px;
-                border: white;
-                margin-bottom: 20px;
-            }
-            #card-top{
-                overflow: hidden;
-            }
-            .card-img-top{
-                width: 100%;
-                height: 260px;
-                object-fit:cover;
-                transform:scale(1.0);
-                transition: transform .2s;
-            }
-            .card-img-top:hover{            /* 마우스 호버시 */
-                transform:scale(1.1);            /* 이미지 확대 */
-                transition: transform .2s; 	/*  시간 설정  */
-            }
-            .heart{
-                background-color: rgba( 255, 255, 255, 0 );
-                border: 0;
-                width: 35px;
-                height: 30px;
-                position: absolute;
-                bottom: 35%;
-                right: 5%
-            }
-        }
-        .comment {
-            background: rgba(0,0,0,0);
-            border: 0;
-            color: darkgrey;
-            padding-left: 0;
-        }
-        .dropdown-toggle::after {
-            content: none;
-        }
-    </style>
 </head>
 <body style="font-family: Cafe24SsurroundAir">
 <header>
@@ -164,7 +49,6 @@
             <div id="auth" style="display: flex;">
                 {% if request.session.user %}
                     <a class="pc-menu">당신의 mbti는 {{ usermbti.mbti }}입니다.</a>
-                    <a class="pc-menu" href="/insert">게시물작성</a>
                     <a class="pc-menu" href="/signPage/logOut">로그아웃</a>
                     <a class="pc-menu" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a>
                 {% else %}
@@ -173,13 +57,14 @@
                 {% endif %}
                 <div class="btn-group dropstart">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPUAAADNCAMAAABXRsaXAAAAaVBMVEUAAAD////6+vrw8PAfHx8cHBz19fXn5+czMzNSUlLz8/MRERE2NjYiIiJsbGzGxsZ1dXW/v7/W1tZ/f3/Jyck1NTWurq5zc3NoaGgtLS21tbVfX1/j4+M9PT3BwcFaWlpOTk6Hh4eVlZXOBACRAAAD7UlEQVR4nO2d63aqMBBGC2i4KCJgsfTUS33/h+zpsoYkBPWHZNaab/YTfHvVJiGZTN4iRN6oA5Ag1gZFwoPiWeuk2/erNy6s+n2XPLSuc+qcM5DXd62rjDrgTPTHSWu1oQ43Ix/Kb50uqZPNyjL1WTfUsWanGVun1JkCkLrWakEdKQBL5VhzHsgGPmzrijpPII6WNdd52iUzrWvqNMGoDWuOy1A/+WCdUGcJSKKtO+ooAem09ZY6SkD22hplBP+l19Z8NhEes7pZK+okQSn+rJGG8Osgjve3VtD/19GaOkpA3rV1Sx0lIK22/qSOEpBPbY00nBXDN9c/6izBOBlfmjvqMMGozL2UA3WaQBysHST+m+FXGnuPFGPyap2d4RjhN76OHeuooI4UAH2QPZxzpexX41/R2DpSvH/kB6Nawzq1/6ZONiPfcTRhHTVcN8bzxvJ061KaPXXAGdg0jqWn8qq65Fm54EGZ5ZfjWHGyyi7mwJSc1BbiINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ4T1tQlUy/jWeukbvOSuhrwZZR5W6cPrXcn6pwzcKruWu+4Fkuvd9PWnDsNbCesU96tkPydvr4Qb0BAdvqK36kjBSBzbzZxvAIwZmNbo1xP3VnWXOdpl7VpfaROEwyz0xfkrXOkNjFDpy/MbhKc198uW22NsEK5kWlr9itwA9BOX7fuT0hDuHT6ok4SEMxOXxn4fI25NkMaxId1OOY3F+j3NeZeCui+GcjktXd2hmOElcpoPxzz7APgnGvl7fSV8qlQ8FF6zzQj3s0Lp86vI8a1Coc7tQq/3hwXp6edY+mrQfo+9dQ5X0Z/auvHrw3+QV0m9jL8elJbiINY4yDWOIg1DmKNg1jjINY4iDUOYo2DWOMg1jiINQ5ijYNY4yDWOIg1DmKNg1jjINY4TFlTV0y9iKet4+Pl3JdLHpT9+VKP3UcVlRvqasAZ+LhfUdmcqQPOxHn6ndyYc6V0O/EmcsH76sc68Vl/UceaHc8NCIS7mqN37TFvNnEeyAa2tnVDnScQjWXN9ZaLy8G0rqjTBKMyrDle7PFj3DpHaphSaGvMbhIY09aVVlsjrFBuSKcvIKTTFw4F9P91lFFHCUivrTGapVwZOn111FEC0mlrpEHc6PTF8ZEPP7nxpVlThwmG1ekLpeduZu0goXT6quw9Uo6HemOc1xAixbsJ0pWFcqxRO33x3xIfTnNxOn0tJjp9Kc5D2kZFfuv/ExjXeTuzX2Nz61JqjovTvHYsPZ2+um3GZ5thlW27pzt9qYQHyq8ntYU4YFr/ACZxfL6iNSmvAAAAAElFTkSuQmCC"
-                         class="menu btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
+                         class="menu btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                         data-bs-toggle="dropdown" aria-expanded="false"
                          style="width: 20px; height: 17px; padding: 0; margin-right: 10px; border: 0">
                     {% if request.session.user %}
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a class="dropdown-item" href="/insert">게시물작성</a></li>
                             <li><a class="dropdown-item" href="/signPage/logOut">로그아웃</a></li>
-                            <li><a class="dropdown-item" href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a></li>
+                            <li><a class="dropdown-item"
+                                   href="/signPage/userUpdate/{{ request.session.user }}">회원정보수정</a></li>
                         </ul>
                     {% else %}
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -233,7 +118,7 @@
     </ul>
 </header>
 <article>
-    <form action="/insert2" method="post"> <!-- 데이터 넘겨주기 -->
+    <form action="/edit2/{{ board.id }}" method="post" enctype="multipart/form-data"> <!-- 데이터 넘겨주기 -->
         {% csrf_token %}
 
         <div class="container" style="width: 50%;">
@@ -243,13 +128,16 @@
             </div>
 
             <div class="row">
-                <input name="img" value="{{ board.img }}">
+                <img src="/media/{{ board.img }}">
+                <input type="file" name="img" value="no">
             </div>
 
             <div class="row">
                 <p style="margin-bottom: 0">
-                    <span class="col-3" style="font-weight: bold;">
-                        {{ request.session.nickname }} &emsp;
+                    <span class="col-3">
+                        <input type="hidden" name="writer" value="{{ request.session.nickname }}">
+                        {{ request.session.nickname }}
+                         &emsp;
                     </span>
                     <span>
                         <input name="content" value="{{ board.content }}">
@@ -258,7 +146,7 @@
             </div>
 
             <div class="d-flex flex-row-reverse bd-highlight">
-                <button>게시물수정</button>
+                <button class="btn btn-outline-primary" style="padding:0;">게시물수정</button>
             </div>
         </div>
     </form>

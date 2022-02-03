@@ -46,5 +46,5 @@ class Board(models.Model):
     writer = models.CharField(max_length=200) # 게시글 작성자
     registered_date = models.DateTimeField(auto_now_add=True) # 게시글 작성시간
     like = models.IntegerField(null=True) # 게시글 좋아요
-    img = models.CharField(max_length=200)  # 게시글 사진 파일 이름
+    img = models.ImageField(upload_to='images/', default='KakaoTalk_Photo_2022-01-18-15-42-07.jpeg', null=False)  # 게시글 사진 파일 이름
 

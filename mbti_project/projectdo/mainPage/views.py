@@ -256,48 +256,51 @@ def community(request):
 
     board_list = Board.objects.order_by('-id')
     print("게시물 전체 조회 >> ", board_list)
+
     try:
         usermbti = User.objects.get(id=request.session['user'])
+
         context = {
             'board': board_list,
-            'usermbti':usermbti,
-            'mbti': mbti_list
+            'usermbti': usermbti,
         }
+
     except:
         context = {
             'board': board_list,
-            'mbti': mbti_list
         }
+
     return render(request, 'mainPage/community.html', context)
 
 def insert(request):
     return render(request, 'mainPage/insert.html')
 
 def insert2(request):
-    data = request.POST
-    print(data)
-    print("게시물의 title >> ", data.get('title'))
-    print("게시물의 img >> ", data.get('img'))
-    print("게시물의 content >> ", data.get('content'))
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
 
-    # 받은 데이터 db에 저장
-    title = data.get('title')
-    img = data.get('img')
-    content = data.get('content')
+        if 'img' in request.FILES:
+            img = request.FILES['img']
+        else:
+            img = 'KakaoTalk_Photo_2022-01-18-15-42-07.jpeg'
 
-    userid = request.session.get('user')
-    user = User.objects.get(id=userid)
-    writer = user.nickname
+        userid = request.session.get('user')
+        user = User.objects.get(id=userid)
+        writer = user.nickname
 
-    board = Board(title=title,
-                  content=content,
-                  writer=writer,
-                  like=0,
-                  img=img)
+        board = Board(
+            title = title,
+            content = content,
+            writer = writer,
+            img = img,
+        )
 
-    # 객체 생성 -> save()
-    board.save()
-    return redirect('/community')
+        board.save()
+        return redirect('/community')
+
+    else:
+        return redirect('/')
 
 def delete(request, bid):
     board = Board.objects.get(id=bid)
@@ -313,15 +316,18 @@ def edit(request, bid):
 
 def edit2(request, bid):
     data = request.POST
-
-    title = data.get('title')
-    img = data.get('img')
-    content = data.get('content')
-
     board = Board.objects.get(id=bid)
 
+    title = data.get('title')
+    content = data.get('content')
+    img = data.get('img')
+
+    if img != 'no':
+        if 'img' in request.FILES:
+            img = request.FILES['img']
+            board.img = img
+
     board.title = title
-    board.img = img
     board.content = content
 
     board.save()
