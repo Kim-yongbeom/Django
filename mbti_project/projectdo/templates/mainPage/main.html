@@ -20,6 +20,7 @@
     </script>
     <script>
         $(document).ready(function () {
+
             {#자동슬라이드#}
             $('.bxslider').bxSlider({ // 클래스명 주의!
                 auto: true, // 자동으로 애니메이션 시작
@@ -65,6 +66,7 @@
                     $("#edd3").css("visibility", "visible").animate({opacity: 1});
                 }
             });
+
             // 카테고리를 고르거나 모든 소품을 고를지 선택할 변수
             var a = true
 
@@ -135,7 +137,19 @@
                             `
                             )
                         }
-
+                        $.ajax({
+                                url: "/redheart",
+                                type: 'GET',
+                                success: function (json) {
+                                    for (i in json.heart) {
+                                        console.log(json.heart[i])
+                                        $('#'+'like-btn'+json.heart[i]).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                                    }
+                                },
+                                error: function () {
+                                    alert('ajax 오류!')
+                                }
+                            })
                         // 하트 클릭
                         $(".heart").unbind("click");
                         $('.heart').bind('click', function () {
@@ -277,6 +291,19 @@
                             `
                                 )
                             }
+                            $.ajax({
+                                url: "/redheart",
+                                type: 'GET',
+                                success: function (json) {
+                                    for (i in json.heart) {
+                                        console.log(json.heart[i])
+                                        $('#'+'like-btn'+json.heart[i]).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                                    }
+                                },
+                                error: function () {
+                                    alert('ajax 오류!')
+                                }
+                            })
                             // 하트 클릭
                             $(".heart").unbind("click");
                             $('.heart').bind('click', function () {
@@ -363,7 +390,6 @@
                     $.ajax({
                         url: "/target1",
                         success: function (json) {
-
                             // 상품 20개씩 보여주기
                             for (i = index - 20; i < index; i++) {
                                 if (i >= JSON.parse(json.goods).length) {
@@ -414,14 +440,27 @@
                                               <div class="btn category btn-primary" style="background: rosybrown; border:white">${allGoods[i].category}</div>
                                           </div>
                                     </div>
-                                    <button type="button" id="like-btn${JSON.parse(json.goods)[i].pk}" name="${JSON.parse(json.goods)[i].pk}" class="heart">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                                    </button>
+                                        <button type="button" id="like-btn${JSON.parse(json.goods)[i].pk}" name="${JSON.parse(json.goods)[i].pk}" class="heart">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="white" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                        </button>
                             </div>
                             </div>
                             `
                                 )
                             }
+                            $.ajax({
+                                url: "/redheart",
+                                type: 'GET',
+                                success: function (json) {
+                                    for (i in json.heart) {
+                                        console.log(json.heart[i])
+                                        $('#'+'like-btn'+json.heart[i]).html('<svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M0 0h24v24H0z" fill="none"/><path id="path1" class="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>')
+                                    }
+                                },
+                                error: function () {
+                                    alert('ajax 오류!')
+                                }
+                            })
                             // 하트 클릭
                             $(".heart").unbind("click");
                             $('.heart').bind('click', function () {
@@ -481,7 +520,6 @@
                     })
                 }
             }
-
         })
     </script>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
@@ -645,7 +683,6 @@
 
         .carousel-item {
             position: relative;
-            padding-bottom: 100%;
         }
 
         .reco_img {

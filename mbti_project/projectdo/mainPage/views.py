@@ -49,17 +49,21 @@ def main(request):
         age = usermbti.age
         job = usermbti.job
         like = usermbti.like
-        # print(mbti)
-        # print(sex)
-        # print(age)
-        # print(job)
-        # print(like)
+        heart = usermbti.heart
+
+        # 좋아요 누른것 보이게 만들기!!
+        liked_pd = heart[:-1]
+        liked_pd = liked_pd.strip()
+        liked_pd = liked_pd.split(',')
+        print(liked_pd)
+
         if mbti == '모름':
             print('mbti 모름')
             context = {'mbti': mbti_list,
                        'goods': goods_list,
                        'bx': bx,
                        'usermbti': usermbti,
+                       'liked_pd': liked_pd,
                        'header1': header1,
                        'headers': headers,
                        }
@@ -147,6 +151,16 @@ def heart(request,pid):
         'data': user.heart,
         'heart' : heart
     }
+    return JsonResponse(context)
+
+def redheart(request):
+    usermbti = User.objects.get(id=request.session['user'])
+    # heart = usermbti.heart
+    heart = usermbti.heart[:-1]
+    heart = heart.split(',')
+
+    context = {'heart' : heart}
+
     return JsonResponse(context)
 
 def target(request):

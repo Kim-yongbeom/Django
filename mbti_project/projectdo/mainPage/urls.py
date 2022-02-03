@@ -21,6 +21,7 @@ import mainPage.views
 urlpatterns = [
     path('', mainPage.views.main),
     path('heart/<pid>', mainPage.views.heart),
+    path('redheart', mainPage.views.redheart),
     path('target', mainPage.views.target),
     path('target1', mainPage.views.target1),
     path('target2', mainPage.views.target2),
