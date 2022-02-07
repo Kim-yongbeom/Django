@@ -320,6 +320,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
   ```
   
   ### 깃허브 클론을 통해 우분투 넣는 과정들
+  - sudo apt update
   - cd venvs/
   - sudo apt install python3-venv
   - ls
